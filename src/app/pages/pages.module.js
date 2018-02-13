@@ -5,9 +5,9 @@
 (function () {
   'use strict';
 
-  angular.module('BlurAdmin.pages', [
+  var bluradmin=angular.module('BlurAdmin.pages', [
     'ui.router',
-
+    'ngStorage',
     'BlurAdmin.pages.dashboard',
     'BlurAdmin.pages.ui',
     'BlurAdmin.pages.components',
@@ -15,9 +15,16 @@
     'BlurAdmin.pages.tables',
     'BlurAdmin.pages.charts',
     'BlurAdmin.pages.maps',
-    'BlurAdmin.pages.profile',
+    'BlurAdmin.pages.profile'
   ])
       .config(routeConfig);
+  bluradmin.run(function ($rootScope,$http,$state,$stateParams,$localStorage,$window) {
+   var authtoken = $localStorage.auth;
+   if(!authtoken){
+    $window.location.href = "/auth.html";
+   }
+  $http.defaults.headers.common.Authorization = $localStorage.auth;
+  });
 
   /** @ngInject */
   function routeConfig($urlRouterProvider, baSidebarServiceProvider) {
