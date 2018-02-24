@@ -1,8 +1,11 @@
-app.controller('LoginController',function($scope,$state,$http,$resource,$localStorage,Md5,Base64,Sha1){
+app.controller('LoginController',function($scope,$state,$http,$localStorage,md5,$window){
+   
+
     $scope.login = function(){
+   console.log($scope.app.host);
         $scope.authError = "";
        //var authdata = Base64.encode($scope.user.username + ':' + $scope.user.password);
-       var passwords=Md5.hex_md5($scope.user.password);
+       var passwords=md5.createHash($scope.user.password);
        // $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata;
    //      var $com = $resource($scope.app.host + "/auth/info/");
    //      $com.get(function(data){
@@ -16,7 +19,7 @@ app.controller('LoginController',function($scope,$state,$http,$resource,$localSt
             method: "POST",      
             url: $scope.app.host + "/auth/getauth/",      
             data: {username: $scope.user.username,password:passwords},    
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },    
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },    
                transformRequest: function(obj) {    
           var str = [];    
           for (var s in obj) {    
@@ -29,7 +32,9 @@ app.controller('LoginController',function($scope,$state,$http,$resource,$localSt
   if(response.status){
     $scope.session_user =$scope.user.username;
     $localStorage.auth = response.data.token;
-    $state.go('app.dashboard');
+    $localStorage.menus=JSON.stringify(response.data.menu);
+    //$state.go('app.dashboard');
+      $window.location.href = "/index.html"; 
   }else{
     $scope.authError=response.data.msg;
   }

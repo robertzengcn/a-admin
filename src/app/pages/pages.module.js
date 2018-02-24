@@ -9,6 +9,7 @@
     'ui.router',
     'ngStorage',
     'BlurAdmin.pages.dashboard',
+   'BlurAdmin.pages.products',
     'BlurAdmin.pages.ui',
     'BlurAdmin.pages.components',
     'BlurAdmin.pages.form',
@@ -48,6 +49,10 @@
         title: '404 Page',
         fixedHref: '404.html',
         blank: true
+      },{
+        title: 'Products',
+        fixedHref: '/#/products',
+        blank: true
       }]
     });
     baSidebarServiceProvider.addStaticItem({
@@ -62,6 +67,10 @@
           title: 'Menu Level 1.2.1',
           disabled: true
         }]
+      },{
+        title: 'Products',
+        stateRef: 'products',
+        fixedHref: './reg.html',
       }]
     });
   }
