@@ -12,7 +12,7 @@
   function BaSidebarCtrl($scope, baSidebarService,$localStorage, baConfig) {
 
     $scope.menuItems = baSidebarService.getMenuItems();
-    console.log($scope.menuItems);
+    
     //添加动态菜单
     $scope.menuItemsAccess = [];
     var jsonMenu=[];
@@ -21,8 +21,7 @@
     }
    
     angular.forEach($scope.menuItems, function (baSideBarMenu) {
-        angular.forEach(jsonMenu, function (accessMenu) {
-          console.log(accessMenu);
+        angular.forEach(jsonMenu, function (accessMenu) {          
             if (accessMenu === baSideBarMenu.name) {
                 $scope.menuItemsAccess.push(baSideBarMenu);
                 return;
@@ -31,7 +30,7 @@
     });
 
     $scope.menuItems = $scope.menuItemsAccess;
-    console.log($scope.menuItems);
+  
     if($scope.menuItems[0]!=undefined){
      $scope.defaultSidebarState = $scope.menuItems[0].stateRef;
     }else{

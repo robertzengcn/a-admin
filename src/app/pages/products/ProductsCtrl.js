@@ -9,8 +9,8 @@
       .controller('ProductsCtrl', ProductsCtrl);
 
   /** @ngInject */
-  function ProductsCtrl($scope, $filter, editableOptions, editableThemes) {
-
+  function ProductsCtrl($scope, $filter, editableOptions, editableThemes,ProductService) {
+ProductService.getproductlist();
       
 
   }
