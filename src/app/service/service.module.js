@@ -6,7 +6,8 @@
   'use strict';
 
   angular.module('BlurAdmin.service', [
-
+'ui.router',
+    'ngStorage',
   ]);
 
 })();

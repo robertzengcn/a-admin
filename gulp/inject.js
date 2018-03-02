@@ -15,7 +15,7 @@ gulp.task('inject-reload', ['inject'], function () {
   browserSync.reload();
 });
 
-gulp.task('inject', ['scripts', 'styles', 'injectAuth', 'inject404', 'copyVendorImages'], function () {
+gulp.task('inject', ['scripts', 'styles', 'injectAuth', 'inject404', 'copyVendorImages','move_env'], function () {
   var injectStyles = gulp.src([
     path.join(conf.paths.tmp, '/serve/app/main.css'),
     path.join('!' + conf.paths.tmp, '/serve/app/vendor.css')
@@ -75,6 +75,13 @@ return injectjsAlone({
     paths: [path.join(conf.paths.src, '/auth.html'), path.join(conf.paths.src, '/reg.html')]
   });
 });
+
+//移动env.json文件
+gulp.task('move_env', [], function () {
+return gulp.src(path.join(conf.paths.src, '/env.json'))
+ .pipe(gulp.dest(path.join(conf.paths.tmp, '/serve')));
+});
+
 
 var injectAlone = function (options) {
   var injectStyles = gulp.src(

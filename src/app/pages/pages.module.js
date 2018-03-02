@@ -22,10 +22,21 @@
       .config(routeConfig);
   bluradmin.run(function ($rootScope,$http,$state,$stateParams,$localStorage,$window) {
    var authtoken = $localStorage.auth;
+
    if(!authtoken){
     $window.location.href = "/auth.html";
    }
+   $http({
+    method: "GET",
+    url: "/env.json",
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+  }).success(function(response) {
+   $rootScope.app = response;  
+  });
   $http.defaults.headers.common.Authorization = $localStorage.auth;
+  $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';  
   });
 
   /** @ngInject */
