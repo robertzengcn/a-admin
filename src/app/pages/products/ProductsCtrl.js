@@ -31,9 +31,14 @@
     var number = pagination.number || 10;  // Number of entries showed per page.
 
     ProductService.getproductlist(start, number, tableState).then(function (result) {
+    	
+    	if(result.status){   	
+
       ctrl.displayed = result.data;
-      tableState.pagination.numberOfPages = result.numberOfPages;//set the number of pages so the pagination can update
+      tableState.pagination.numberOfPages = result.recordsTotal;//set the number of pages so the pagination can update
       ctrl.isLoading = false;
+     // console.log(ctrl.displayed);
+}
     });
   };      
   }

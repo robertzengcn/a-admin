@@ -5,7 +5,9 @@
 (function () {
   'use strict';
 
-  angular.module('BlurAdmin.pages.products', [])
+  angular.module('BlurAdmin.pages.products', [
+    'ng.ueditor'
+    ])
       .config(routeConfig);
 
   /** @ngInject */
@@ -28,6 +30,19 @@
           sidebarMeta: {
             order: 100,
           },
+        }).state('products.detail', {
+          url: '/detail/:id',
+          templateUrl: 'app/pages/products/widgets/productDetail.html',
+          title: 'Detail',
+          controller: 'ProductsdetailCtrl', 
+          resolve: {
+            productmodels:function($stateParams,ProductService){
+              return ProductService.getproduct($stateParams.id);
+            },
+            cateloguelist:function(ProductService){
+              return ProductService.getcateloguelist();
+            }
+          }       
         });
          $urlRouterProvider.when('/products','/products/list');
   }
