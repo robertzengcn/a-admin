@@ -26,9 +26,16 @@
 		$scope.cateloguelist = cateloguelist.data;
 
 		//配置ueditor
-		 $scope.config = {
-        serverUrl:$localStorage.fileapi
-    };
+		$scope.config = {
+			serverUrl: $localStorage.fileapi
+		};
+		var ue = UE.getEditor('product_description');
+		ue.ready(function() {
+			ue.execCommand('serverparam', {//插入参数
+				'key1': 'value1',
+				'key2': 'value2',
+			});
+		});
 
 		uploader.filters.push({
 			name: 'imageFilter',
@@ -62,7 +69,7 @@
 		};
 		uploader.onSuccessItem = function(fileItem, response, status, headers) {
 			//console.info('onSuccessItem', fileItem, response, status, headers);
-	
+
 		};
 		uploader.onErrorItem = function(fileItem, response, status, headers) {
 			console.info('onErrorItem', fileItem, response, status, headers);
@@ -72,15 +79,15 @@
 		};
 		uploader.onCompleteItem = function(fileItem, response, status, headers) {
 			console.info('onCompleteItem', fileItem, response, status, headers);
-				console.log(status);
-				if (response.status) {
+			console.log(status);
+			if (response.status) {
 				console.log(response);
 				console.log(status);
-				$scope.detail.full_products_image=response.data.url;
-				$scope.detail.products_image=response.data.path;
+				$scope.detail.full_products_image = response.data.url;
+				$scope.detail.products_image = response.data.path;
 				uploader.clearQueue(); //清除上传队列
 				uploader.showtable = false;
-			}else{
+			} else {
 				console.log('error');
 				layer.alert(response.msg);
 			}
