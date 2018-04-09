@@ -59,7 +59,9 @@
     "angular-md5": "^0.1.10",
     "datatables.net": "^1.10.16",
     "datatables.net-bs": "^2.1.1",
-    "angular-ueditor": "*"
+    "angular-ueditor": "*",
+    "angular-file-upload": "^2.5.0",
+    "angular-material": "^1.1.8"
   },
   "resolutions": {
     "angular": "~1.5.9",

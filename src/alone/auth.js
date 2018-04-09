@@ -32,6 +32,7 @@ app.controller('LoginController',function($scope,$state,$http,$localStorage,md5,
   if(response.status){
     $scope.session_user =$scope.user.username;
     $localStorage.auth = response.data.token;
+    $localStorage.fileapi = response.data.fileapi;
     $localStorage.menus=JSON.stringify(response.data.menu);
     //$state.go('app.dashboard');
       $window.location.href = "/index.html"; 

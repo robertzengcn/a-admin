@@ -3,8 +3,8 @@
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="product_id">PRODUCT ID</label>  
-  <div class="col-md-4">
+  <label class="col-md-2 control-label" for="product_id">PRODUCT ID</label>  
+  <div class="col-md-8">
   <input id="product_id" name="product_id" placeholder="PRODUCT ID" class="form-control input-md" required="" type="text" ng-model="detail.products_id">
     
   </div>
@@ -12,8 +12,8 @@
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="product_name">PRODUCT NAME</label>  
-  <div class="col-md-4">
+  <label class="col-md-2 control-label" for="product_name">PRODUCT NAME</label>  
+  <div class="col-md-8">
   <input id="product_name" name="product_name" placeholder="PRODUCT NAME" class="form-control input-md" required="" type="text" ng-model="detail.products_name">
     
   </div>
@@ -24,8 +24,8 @@
 
 <!-- Select Basic -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="product_categorie">PRODUCT CATEGORY</label>
-  <div class="col-md-4">
+  <label class="col-md-2 control-label" for="product_categorie">PRODUCT CATEGORY</label>
+  <div class="col-md-8">
     <select id="product_categorie" name="product_categorie" class="form-control" ng-options="value.categories_id as value.categories_name group by value.parent for (key,value) in cateloguelist" ng-model="detail.master_categories_id">
     </select>
   </div>
@@ -33,8 +33,8 @@
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="available_quantity">AVAILABLE QUANTITY</label>  
-  <div class="col-md-4">
+  <label class="col-md-2 control-label" for="available_quantity">AVAILABLE QUANTITY</label>  
+  <div class="col-md-8">
   <input id="available_quantity" name="available_quantity" placeholder="AVAILABLE QUANTITY" class="form-control input-md" required="" type="text" ng-model="detail.products_quantity">
     
   </div>
@@ -42,74 +42,107 @@
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="product_weight">PRODUCT WEIGHT</label>  
-  <div class="col-md-4">
+  <label class="col-md-2 control-label" for="product_weight">PRODUCT WEIGHT</label>  
+  <div class="col-md-8">
   <input id="product_weight" name="product_weight" placeholder="PRODUCT WEIGHT" class="form-control input-md" required="" type="text" ng-model="detail.products_weight">
     
   </div>
 </div>
 
-<!-- Textarea -->
+
+<!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="product_description">PRODUCT DESCRIPTION</label>
+  <label class="col-md-2 control-label" for="singlebutton">Product status</label>
+  <div class="col-md-8">
+<ba-switcher switcher-style="primary" switcher-value="detail.products_status"></ba-switcher>
+</div>
+  </div>
+<div class="form-group">
+   <label class="col-md-2 control-label" for="singlebutton">Product image</label>
+  <div class="col-md-4  no-padding productimage">
+        <img ng-src="{{detail.full_products_image}}" class="human-picture">
+  </div>
+</div>
+<div class="form-group" id="uimagelist">
+
+<table class="table" ng-show="uploader.showtable">
+                        <thead>
+                            <tr>
+                                <th width="50%">Name</th>
+                                <th ng-show="uploader.isHTML5">Size</th>
+                                <th ng-show="uploader.isHTML5">Progress</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in uploader.queue">
+                                <td>
+                                    <strong>{{ item.file.name }}</strong>
+                                    <!-- Image preview -->
+                                    <!--auto height-->
+                                    <!--<div ng-thumb="{ file: item.file, width: 100 }"></div>-->
+                                    <!--auto width-->
+                                    <div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div>
+                                    <!--fixed width and height -->
+                                    <!--<div ng-thumb="{ file: item.file, width: 100, height: 100 }"></div>-->
+                                </td>
+                                <td ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+                                <td ng-show="uploader.isHTML5">
+                                    <div class="progress" style="margin-bottom: 0;">
+                                        <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                                    <span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                                    <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+                                </td>
+                                <td nowrap>
+                                    <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                                        <span class="glyphicon glyphicon-upload"></span> Upload
+                                    </button>
+                                    <button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()" ng-disabled="!item.isUploading">
+                                        <span class="glyphicon glyphicon-ban-circle"></span> Cancel
+                                    </button>
+                                    <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+                                        <span class="glyphicon glyphicon-trash"></span> Remove
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+</div>
+ <div ng-show="uploader.isHTML5">
+  <div class="form-group">
+   <label class="col-md-2 control-label" for="singlebutton">Upload image</label>
+    <div class="col-md-4  no-padding productimage">
+   <input type="file" nv-file-select="" uploader="uploader" name="image" />
+ </div>
+  </div>
+</div>
+<input type="hidden" value="" ng-model="detail.products_image" name="products_image" />
+
+ <!-- Textarea -->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="product_description">PRODUCT DESCRIPTION</label>
   <div class="col-md-8">                     
-    <textarea class="form-control ueditor" id="product_description" name="product_description" ng-model="detail.products_description"></textarea>
+    <div class="ueditor" id="product_description" name="product_description" ng-model="detail.products_description" config="config"></div>
   </div>
-</div>
-
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="stock_alert">STOCK ALERT</label>  
-  <div class="col-md-4">
-  <input id="stock_alert" name="stock_alert" placeholder="STOCK ALERT" class="form-control input-md" required="" type="text">
-    
-  </div>
-</div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="online_date">ONLINE DATE</label>  
-  <div class="col-md-4">
-  <input id="online_date" name="online_date" placeholder="ONLINE DATE" class="form-control input-md" required="" type="text">
-    
-  </div>
-</div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="author">AUTHOR</label>  
-  <div class="col-md-4">
-  <input id="author" name="author" placeholder="AUTHOR" class="form-control input-md" required="" type="text">
-    
-  </div>
-</div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="enable_display">ENABLE DISPLAY</label>  
-  <div class="col-md-4">
-  <input id="enable_display" name="enable_display" placeholder="ENABLE DISPLAY" class="form-control input-md" required="" type="text">
-    
-  </div>
-</div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="comment">COMMENT</label>  
-  <div class="col-md-4">
-  <input id="comment" name="comment" placeholder="COMMENT" class="form-control input-md" required="" type="text">
-    
-  </div>
-</div>
+</div> 
 
 <!-- Button -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="singlebutton">Single Button</label>
-  <div class="col-md-4">
-    <button id="singlebutton" name="singlebutton" class="btn btn-primary">Button</button>
+  <label class="col-md-2 control-label" for="singlebutton"></label>
+  <div class="col-md-8">
+    <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
   </div>
   </div>
 
 </fieldset>
+
 </form>
+<script type="text/javascript" src="../jslib/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="../jslib/ueditor/ueditor.all.js"></script>
+
+

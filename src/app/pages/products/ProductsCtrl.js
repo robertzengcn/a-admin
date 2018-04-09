@@ -38,7 +38,7 @@
       tableState.pagination.numberOfPages = result.recordsTotal;//set the number of pages so the pagination can update
       ctrl.isLoading = false;
      // console.log(ctrl.displayed);
-}
+      }
     });
   };      
   }

@@ -26,6 +26,7 @@ app.run(function($rootScope, $http, $state, $stateParams, $localStorage, $window
     
     $rootScope.app = response;
     $localStorage.host=response.host;
+     $localStorage.fileapi=response.fileapi;
     var authtoken = $localStorage.auth;
 
 

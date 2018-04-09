@@ -6,7 +6,8 @@
   'use strict';
 
   angular.module('BlurAdmin.pages.products', [
-    'ng.ueditor'
+    'ng.ueditor',
+    'angularFileUpload'
     ])
       .config(routeConfig);
 
