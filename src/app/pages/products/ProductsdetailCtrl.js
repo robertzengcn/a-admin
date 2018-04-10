@@ -27,15 +27,10 @@
 
 		//配置ueditor
 		$scope.config = {
-			serverUrl: $localStorage.fileapi
+			serverUrl: $localStorage.ueapi,
 		};
-		var ue = UE.getEditor('product_description');
-		ue.ready(function() {
-			ue.execCommand('serverparam', {//插入参数
-				'key1': 'value1',
-				'key2': 'value2',
-			});
-		});
+		
+
 
 		uploader.filters.push({
 			name: 'imageFilter',
