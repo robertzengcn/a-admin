@@ -8021,12 +8021,13 @@ var fillCharReg = new RegExp(domUtils.fillChar, 'g');
                 imageUrl = this.getOpt('imageUrl'),
                 serverUrl = this.getOpt('serverUrl');
 
+
             if(!serverUrl && imageUrl) {
                 serverUrl = imageUrl.replace(/^(.*[\/]).+([\.].+)$/, '$1controller$2');
             }
 
             if(serverUrl) {
-                serverUrl = serverUrl + (serverUrl.indexOf('?') == -1 ? '?':'&') + 'action=' + (actionName || '');
+                serverUrl = serverUrl + (serverUrl.indexOf('?') == -1 ? '?':'&') + 'actions=' + (actionName || '');
                 return utils.formatUrl(serverUrl);
             } else {
                 return '';
@@ -8080,7 +8081,9 @@ UE.Editor.defaultOptions = function(editor){
                 me.options.imageUrl && me.setOpt('serverUrl', me.options.imageUrl.replace(/^(.*[\/]).+([\.].+)$/, '$1controller$2'));
 
                 var configUrl = me.getActionUrl('config'),
+                    auth=me.getOpt('auth'),               
                     isJsonp = utils.isCrossDomainUrl(configUrl);
+
 
                 /* 发出ajax请求 */
                 me._serverConfigLoaded = false;
@@ -8088,7 +8091,9 @@ UE.Editor.defaultOptions = function(editor){
                 configUrl && UE.ajax.request(configUrl,{
                     'method': 'GET',
                     'dataType': isJsonp ? 'jsonp':'',
+                    'auth':auth,
                     'onsuccess':function(r){
+                        console.log('success');
                         try {
                             var config = isJsonp ? r:eval("("+r.responseText+")");
                             utils.extend(me.options, config);
@@ -8192,13 +8197,14 @@ UE.ajax = function() {
     }
 
     function doAjax(url, ajaxOptions) {
+        console.log(ajaxOptions);
         var xhr = creatAjaxRequest(),
         //是否超时
             timeIsOut = false,
         //默认参数
             defaultAjaxOptions = {
                 method:"POST",
-                timeout:5000,
+                timeout:8000,
                 async:true,
                 data:{},//需要传递对象的话只能覆盖
                 onsuccess:function() {
@@ -8240,6 +8246,10 @@ UE.ajax = function() {
                 }
             }
         };
+         console.log(ajaxOpts.auth);
+        if(ajaxOpts.auth){
+           xhr.setRequestHeader('Authorization', auth);
+        }
         if (method == "POST") {
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             xhr.send(submitStr);
@@ -23812,7 +23822,7 @@ UE.plugin.register('autoupload', function (){
             errorHandler(me.getLang('autoupload.exceedTypeError'));
             return;
         }
-
+var auth=me.getOpt(auth);
         /* 创建Ajax并提交 */
         var xhr = new XMLHttpRequest(),
             fd = new FormData(),
@@ -23823,6 +23833,10 @@ UE.plugin.register('autoupload', function (){
         fd.append('type', 'ajax');
         xhr.open("post", url, true);
         xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+        if(auth){
+           xhr.setRequestHeader("Authorization", auth);   
+        }
+        console.log('send file');
         xhr.addEventListener('load', function (e) {
             try{
                 var json = (new Function("return " + utils.trim(e.target.response)))();

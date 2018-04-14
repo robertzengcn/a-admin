@@ -28,8 +28,17 @@
 		//配置ueditor
 		$scope.config = {
 			serverUrl: $localStorage.ueapi,
+			auth: auth,
 		};
-		
+
+		$scope.ready = function(editor) { //编辑器加载完毕
+			editor.execCommand('serverparam', function(editor) {
+					return {
+						'auth': auth					
+				}
+			});
+		}
+
 
 
 		uploader.filters.push({
