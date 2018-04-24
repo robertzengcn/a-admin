@@ -153,13 +153,16 @@
     </tbody>
 </table>
  </div>
- <div class="col-md-3">  
+ 
+</div>
+<div class="form-group">
+   <label class="col-md-2 control-label" for="product_description">Add multi images</label>
+<div class="col-md-8">  
    <div ng-show="uploaders.isHTML5" class="pull-left">
       <input type="file" nv-file-select="" uploader="uploaders" name="image" multiple />
    </div>
  </div>
 </div>
-
 <div class="form-group" id="uploadsimage" ng-show="uploaders.showtable">
 
 <table class="table">
@@ -209,6 +212,14 @@
                             </tr>
                         </tbody>
                     </table>
+</div>
+
+<div class="form-group">
+   <label class="col-md-2 control-label" for="product_description">Attributor</label>
+<div class="col-md-8">  
+ <input type="text" id="attributor_name"/><button ng-click="addattri()"> <span class="glyphicon glyphicon-trash"></span> Add</button>
+
+ </div>
 </div>
 
 

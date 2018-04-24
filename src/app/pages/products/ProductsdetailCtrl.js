@@ -152,7 +152,10 @@
 			console.info('onCompleteAll');
 		};
 
+//添加产品属性
+$scope.addattri=function(){
 
+};
 
 
 
