@@ -152,10 +152,33 @@
 			console.info('onCompleteAll');
 		};
 
+
+
 //添加产品属性
 $scope.addattri=function(){
 
 };
+//console.log($scope.detail.attr.length);
+$scope.getattrlen=function(jsonData){
+	   var jsonLength = 0;  
+  
+    for(var item in jsonData){  
+  
+        jsonLength++;  
+  
+    }  
+  
+    return jsonLength;  
+}
+$scope.showattrlist=true;
+	if($scope.getattrlen($scope.detail.attr)>0){
+		console.log('show it');
+		$scope.showattrlist=true;
+	}else{
+	$scope.showattrlist=false;
+	}
+console.log($scope.showattrlist);
+
 
 
 

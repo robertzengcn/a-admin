@@ -213,11 +213,53 @@
                         </tbody>
                     </table>
 </div>
+<h5>Attributor List</h5>
+<div class="form-group" ng-show="showattrlist">
+<table class="table" >
+  <thead>
+                            <tr>
+                              <th>Option Name</th>
+                                <th>Value Name</th>
+                                <th>Type</th>
+                                <th >Image</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody ng-repeat="(ikey,item) in detail.attr">
+
+                          <tr ng-repeat="sitem in item">
+
+                            <td  ng-if="$first" rowspan={{item.length}}>{{ikey}}</td>
+
+                            <td>{{sitem.products_options_values_name}}</td>
+                            <td>{{sitem.products_options_types_name}}</td>
+                            <td><img ng-if="sitem.fullimage!=null" src="{{sitem.fullimage}}" width="100px" height="100px" /></td>
+                            <td>{{sitem.attributes_status?'ON':'OFF'}}</td>
+                            <td><button class="btn btn-info" ng-if="sitem.products_options_types_name=='Radio'">UPload Image</button> <button class="btn btn-success">Delete</button> </td>
+                            <td  ng-if="$first" rowspan={{item.length}}><button class="btn btn-warning">Add</button></td>
+
+                          </tr>
+
+                        </tbody>
+
+</table>  
+  
+
+ </div>
+</div>
 
 <div class="form-group">
-   <label class="col-md-2 control-label" for="product_description">Attributor</label>
+   <label class="col-md-2 control-label" for="product_description">Add Attributor</label>
 <div class="col-md-8">  
- <input type="text" id="attributor_name"/><button ng-click="addattri()"> <span class="glyphicon glyphicon-trash"></span> Add</button>
+ <input type="text" id="attributor_name"/><select>
+  <option value="0" selected="selected">Dropdown</option>
+<option value="1">Text</option>
+<option value="2">Radio</option>
+<option value="3">Checkbox</option>
+<option value="4">File</option>
+<option value="5">Read Only</option>
+</select><button ng-click="addattri()"> <span class="glyphicon glyphicon-trash"></span> Add</button>
 
  </div>
 </div>
