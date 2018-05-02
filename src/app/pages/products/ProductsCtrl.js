@@ -17,6 +17,7 @@
 // }).then(function(result){
 
 // });
+
   var ctrl = this;
 
   this.displayed = [];
