@@ -228,17 +228,17 @@
                         </thead>
                         <tbody ng-repeat="(ikey,item) in detail.attr">
 
-                          <tr ng-repeat="sitem in item" class="editable-tr-wrap">
+                          <tr ng-repeat="sitem in item" class="editable-tr-wrap editable-row">
 
                             <td  ng-if="$first" rowspan={{item.length}}>{{ikey}}</td>
 
-                            <td editable-text="sitem.products_options_values_name" e-name="name" e-form="rowform">{{sitem.products_options_values_name}}</td>
+                            <td><span editable-text="sitem.products_options_values_name" e-name="options_values_name" e-form="rowform">{{sitem.products_options_values_name}}</span></td>
                             <td>{{sitem.products_options_types_name}}</td>
                             <td><img ng-if="sitem.fullimage!=null" src="{{sitem.fullimage}}" width="100px" height="100px" /></td>
                             <td>{{sitem.attributes_status?'ON':'OFF'}}</td>
-                            <td><button class="btn btn-info" ng-if="sitem.products_options_types_name=='Radio'">UPload Image</button> <button class="btn btn-success">Delete</button> 
-                               <form editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline"
-            shown="inserted == user">
+                            <td>
+                            <form editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline"
+            >
         <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs">
           Save
         </button>
@@ -246,6 +246,9 @@
           Cancel
         </button>
       </form>
+                              <button class="btn btn-info" ng-if="sitem.products_options_types_name=='Radio'">UPload Image</button> <button class="btn btn-success">Delete</button> 
+
+                             
       <div class="buttons" ng-show="!rowform.$visible">
         <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()">Edit</button>
         <button class="btn btn-danger editable-table-button btn-xs" ng-click="removeUser($index)">Delete</button>
