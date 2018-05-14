@@ -180,7 +180,7 @@ $scope.showattrlist=true;
 $scope.delattri=function(pid,attrid){
    $http({      
             method: "POST",      
-            url: $scope.app.host + "/auth/getauth/",      
+            url: $scope.app.host + "/Products/delproattr/",      
             data: {pid:pid,attid: attrid},    
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },    
                transformRequest: function(obj) {    
@@ -198,7 +198,7 @@ $scope.delattri=function(pid,attrid){
   }
  });
 
-}
+};
 	}
 
 })();
