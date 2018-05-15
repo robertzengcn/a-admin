@@ -177,7 +177,7 @@ $scope.showattrlist=true;
 	}else{
 	$scope.showattrlist=false;
 	}
-$scope.delattri=function(pid,attrid){
+$scope.delattri=function(pid,attrid,id){
    $http({      
             method: "POST",      
             url: $scope.app.host + "/Products/delproattr/",      
