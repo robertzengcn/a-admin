@@ -192,7 +192,9 @@ $scope.delattri=function(pid,attrid,s,i){
         }    
  }).success(function (response){
   if(response.status){//success
-$scope.detail.attr.s.splice(i, 1);
+console.log(s);
+  	console.log($scope.detail.attr[s]);
+delete $scope.detail.attr[s];
  
   }else{
    
