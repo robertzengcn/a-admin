@@ -266,7 +266,7 @@
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody ng-repeat="(ikey,item) in detail.attr">
+                        <tbody ng-repeat="(ikey,item) in detail.attr" ng-init="parentIndex = $index">
 
                           <tr ng-repeat="sitem in item track by $index">
 
@@ -281,7 +281,7 @@
                               <button class="btn btn-info" ng-if="sitem.products_options_types_name=='Radio'">UPload Image</button> <button class="btn btn-success">Delete</button>                             
                             </td>
                             <td  ng-if="$first" rowspan={{item.length}}><button class="btn btn-warning">Add</button>
-                              <button class="btn btn-danger" ng-click="delattri(detail.products_id,sitem.products_attributes_id,$index)">Delete</button>
+                              <button class="btn btn-danger" ng-click="delattri(detail.products_id,sitem.products_attributes_id,$parent.$index,$index)">Delete</button>
                             </td>
 
                           </tr>

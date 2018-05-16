@@ -177,7 +177,7 @@ $scope.showattrlist=true;
 	}else{
 	$scope.showattrlist=false;
 	}
-$scope.delattri=function(pid,attrid,id){
+$scope.delattri=function(pid,attrid,s,i){
    $http({      
             method: "POST",      
             url: $scope.app.host + "/Products/delproattr/",      
@@ -191,8 +191,9 @@ $scope.delattri=function(pid,attrid,id){
           return str.join("&");    
         }    
  }).success(function (response){
-  if(response.status){
-
+  if(response.status){//success
+$scope.detail.attr.s.splice(i, 1);
+ 
   }else{
    
   }
