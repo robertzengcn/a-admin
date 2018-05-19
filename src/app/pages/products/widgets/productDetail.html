@@ -255,7 +255,7 @@
     <div class="col-md-12">
      <h5>Attributor List</h5>
 <div class="form-group" ng-show="showattrlist">
-<table class="table" st-table="detail.attr">
+<table class="table" st-table="detail.attr.attrlist">
   <thead>
                             <tr>
                               <th>Option Name</th>
@@ -278,10 +278,10 @@
                             <td>{{sitem.attributes_status?'ON':'OFF'}}</td>
                             <td>
                             
-                              <button class="btn btn-info" ng-if="sitem.products_options_types_name=='Radio'">UPload Image</button> <button class="btn btn-success">Delete</button>                             
+                              <button class="btn btn-info" ng-if="sitem.products_options_types_name=='Radio'">UPload Image</button> <button class="btn btn-success" ng-click="deleattitem(detail.products_id,sitem.products_attributes_id,ikey,$index)">Delete</button>                             
                             </td>
                             <td  ng-if="$first" rowspan={{item.length}}><button class="btn btn-warning">Add</button>
-                              <button class="btn btn-danger" ng-click="delattri(detail.products_id,sitem.products_attributes_id,ikey,$index)">Delete</button>
+                              <button class="btn btn-danger" ng-click="delattri(detail.products_id,ikey)">Delete</button>
                             </td>
 
                           </tr>

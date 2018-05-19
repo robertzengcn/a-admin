@@ -177,11 +177,11 @@ $scope.showattrlist=true;
 	}else{
 	$scope.showattrlist=false;
 	}
-$scope.delattri=function(pid,attrid,s,i){
+$scope.delattri=function(pid,sname){
    $http({      
             method: "POST",      
             url: $scope.app.host + "/Products/delproattr/",      
-            data: {pid:pid,attid: attrid},    
+            data: {pid:pid,attname: sname},    
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },    
                transformRequest: function(obj) {    
           var str = [];    
@@ -192,9 +192,8 @@ $scope.delattri=function(pid,attrid,s,i){
         }    
  }).success(function (response){
   if(response.status){//success
-console.log(s);
-  	console.log($scope.detail.attr[s]);
-delete $scope.detail.attr[s];
+
+delete $scope.detail.attr[sname];
  
   }else{
    
