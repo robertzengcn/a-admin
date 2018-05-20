@@ -266,11 +266,11 @@
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody ng-repeat="(ikey,item) in detail.attr" ng-init="parentIndex = $index">
+                        <tbody ng-repeat="(ikey,item) in detail.attr.attrlist" ng-init="parentIndex = $index">
 
                           <tr ng-repeat="sitem in item track by $index">
 
-                            <td  ng-if="$first" rowspan={{item.length}}>{{ikey}}</td>
+                            <td  ng-if="$first" rowspan={{item.length}}>{{detail.attr.optlist[ikey]}}</td>
 
                             <td>{{sitem.products_options_values_name}}</td>
                             <td>{{sitem.products_options_types_name}}</td>
@@ -278,7 +278,7 @@
                             <td>{{sitem.attributes_status?'ON':'OFF'}}</td>
                             <td>
                             
-                              <button class="btn btn-info" ng-if="sitem.products_options_types_name=='Radio'">UPload Image</button> <button class="btn btn-success" ng-click="deleattitem(detail.products_id,sitem.products_attributes_id,ikey,$index)">Delete</button>                             
+                              <button class="btn btn-info" ng-if="sitem.products_options_types_name=='Radio'">UPload Image</button> <button class="btn btn-success" ng-click="deleattitem(detail.products_id,sitem.options_values_id,ikey,$index)">Delete</button>                             
                             </td>
                             <td  ng-if="$first" rowspan={{item.length}}><button class="btn btn-warning">Add</button>
                               <button class="btn btn-danger" ng-click="delattri(detail.products_id,ikey)">Delete</button>
