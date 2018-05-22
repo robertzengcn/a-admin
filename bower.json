@@ -60,7 +60,8 @@
     "datatables.net": "^1.10.16",
     "datatables.net-bs": "^2.1.1",
     "angular-ueditor": "*",
-    "angular-file-upload": "^2.5.0"
+    "angular-file-upload": "^2.5.0",
+    "ng-file-upload": "^12.2.13"
   },
   "resolutions": {
     "angular": "~1.5.9",
