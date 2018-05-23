@@ -275,7 +275,7 @@
 		 * @return    {[type]}
 		 * 								
 		 */
-		$scope.uplpoadattrimg = function(file, errFiles, pid, options_values_id) {
+		$scope.uplpoadattrimg = function(file, errFiles, pid, options_values_id,keys,indexs) {
 			$scope.f = file;
 			$scope.errFile = errFiles && errFiles[0];
 
@@ -311,14 +311,19 @@
 									}
 									return str.join("&");
 								}
-							}).success(function(response) {								
-								if (response.status) { //success
-									
-									
+							}).success(function(responses) {								
+								if (responses.status) { //success
+									console.log($scope.detail.attr.attrlist[keys][indexs]);
+									console.log(indexs);
+									$scope.detail.attr.attrlist[keys][indexs].attributes_image=response.data.data.path;
+									$scope.detail.attr.attrlist[keys][indexs].fullimage=response.data.data.url;
+									layer.msg('update success');
 								} else {
-									layer.alert(response.data.msg);
+									layer.alert(responses.msg);
 								}
 							});
+						}else{
+							layer.alert(response.data.msg);
 						}
 					});
 				}, function(response) {
