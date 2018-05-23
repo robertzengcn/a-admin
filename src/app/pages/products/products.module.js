@@ -7,7 +7,8 @@
 
   angular.module('BlurAdmin.pages.products', [
     'ng.ueditor',
-    'angularFileUpload'
+    'angularFileUpload',
+    'ngFileUpload'
     ])
       .config(routeConfig);
 

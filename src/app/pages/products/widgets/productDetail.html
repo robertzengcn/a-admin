@@ -265,8 +265,8 @@
                             <td><img ng-if="sitem.fullimage!=null" src="{{sitem.fullimage}}" width="100px" height="100px" /></td>
                             <td>{{sitem.attributes_status?'ON':'OFF'}}</td>
                             <td>
-                            <input type="file" name="{{detail.products_id}}_{{sitem.options_values_id}}_attrimg" />
-                              <button class="btn btn-info" ng-if="sitem.products_options_types_name=='Radio'" ng-click="uplpoadattrimg()">UPload Image</button> <button class="btn btn-success" ng-click="deleattitem(detail.products_id,sitem.options_values_id,ikey,$index)">Delete</button>                             
+                          
+                              <button type="file" class="btn btn-info" ng-if="sitem.products_options_types_name=='Radio'" ngf-select="uplpoadattrimg($file, $invalidFiles,detail.products_id,sitem.options_values_id)">UPload Image</button> <button class="btn btn-success" ng-click="deleattitem(detail.products_id,sitem.options_values_id,ikey,$index)">Delete</button>                             
                             </td>
                             <td  ng-if="$first" rowspan={{item.length}}><button class="btn btn-warning">Add</button>
                               <button class="btn btn-danger" ng-click="delattri(detail.products_id,ikey)">Delete</button>
