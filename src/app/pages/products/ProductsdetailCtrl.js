@@ -9,7 +9,7 @@
 		.controller('ProductsdetailCtrl', ProductsdetailCtrl);
 
 	/** @ngInject */
-	function ProductsdetailCtrl($scope, $filter, $localStorage, editableOptions, editableThemes, ProductService, productmodels, cateloguelist, FileUploader, $http, Upload, $timeout) {
+	function ProductsdetailCtrl($scope, $filter, $localStorage, editableOptions, editableThemes, ProductService, productmodels, cateloguelist, FileUploader, $http, Upload, $timeout, $uibModal, baProgressModal) {
 		var auth = $localStorage.auth;
 		var uploader = $scope.uploader = new FileUploader({
 			url: $localStorage.fileapi,
@@ -275,11 +275,12 @@
 		 * @return    {[type]}
 		 * 								
 		 */
-		$scope.uplpoadattrimg = function(file, errFiles, pid, options_values_id,keys,indexs) {
+		$scope.uplpoadattrimg = function(file, errFiles, pid, options_values_id, keys, indexs) {
 			$scope.f = file;
 			$scope.errFile = errFiles && errFiles[0];
 
 			if (file) {
+				layer.load(1);
 				file.upload = Upload.upload({
 					url: $localStorage.fileapi,
 					data: {
@@ -289,17 +290,19 @@
 
 				file.upload.then(function(response) {
 					$timeout(function() {
+						layer.closeAll('loading');
 						file.result = response.data;
 						//console.log(file.result);
 						if (response.data.status) { //上传图片成功
 							layer.msg('Upload image success!');
+							layer.load(1);
 							$http({
 								method: "POST",
 								url: $scope.app.host + "/Products/setattrimg/",
 								data: {
 									pid: pid,
 									options_values_id: options_values_id,
-									imgsrc:response.data.data.path
+									imgsrc: response.data.data.path
 								},
 								headers: {
 									'Content-Type': 'application/x-www-form-urlencoded'
@@ -311,23 +314,24 @@
 									}
 									return str.join("&");
 								}
-							}).success(function(responses) {								
+							}).success(function(responses) {
+								layer.closeAll('loading');
 								if (responses.status) { //success
 									console.log($scope.detail.attr.attrlist[keys][indexs]);
 									console.log(indexs);
-									$scope.detail.attr.attrlist[keys][indexs].attributes_image=response.data.data.path;
-									$scope.detail.attr.attrlist[keys][indexs].fullimage=response.data.data.url;
+									$scope.detail.attr.attrlist[keys][indexs].attributes_image = response.data.data.path;
+									$scope.detail.attr.attrlist[keys][indexs].fullimage = response.data.data.url;
 									layer.msg('update success');
 								} else {
 									layer.alert(responses.msg);
 								}
 							});
-						}else{
+						} else {
 							layer.alert(response.data.msg);
 						}
 					});
 				}, function(response) {
-					if (response.status > 0) {						
+					if (response.status > 0) {
 
 						// $scope.errorMsg = response.status + ': ' + response.data;
 					}
@@ -337,6 +341,49 @@
 				});
 			}
 
+		};
+		/**
+		 * @Author    Robert      Zeng
+		 * @DateTime  2018-05-24
+		 * @copyright [copyright]
+		 * @license   [license]
+		 * @version   [version]
+		 * @param     {[number]} key 要添加元素的属性id
+		 * @return    {[type]}
+		 */
+		$scope.addattitem = function(keys) {
+
+
+			var attritem = {};
+
+
+
+			//$scope.detail.attr.attrlist[keys].push();
+		};
+		/**
+		 * 打开模态窗口
+		 * @Author    Robert      Zeng
+		 * @DateTime  2018-05-24
+		 * @copyright [copyright]
+		 * @license   [license]
+		 * @version   [version]
+		 * @param     {[type]}
+		 * @param     {[type]}
+		 * @return    {[type]}
+		 */
+		$scope.opensetatti = function(page, size,item) {
+
+			$uibModal.open({
+				animation: true,
+				templateUrl: page,
+				size: size,
+				resolve: {
+					items: function() {
+						
+						return item;
+					}
+				}
+			});
 		};
 
 	}
