@@ -7,7 +7,6 @@
 
 	angular.module('BlurAdmin.pages.products')
 		.controller('ProductsdetailCtrl', ProductsdetailCtrl);
-
 	/** @ngInject */
 	function ProductsdetailCtrl($scope, $filter, $localStorage, editableOptions, editableThemes, ProductService, productmodels, cateloguelist, FileUploader, $http, Upload, $timeout, $uibModal, baProgressModal) {
 		var auth = $localStorage.auth;
@@ -371,21 +370,26 @@
 		 * @param     {[type]}
 		 * @return    {[type]}
 		 */
-		$scope.opensetatti = function(page, size,item) {
-
+		$scope.opensetatti = function(page, size, item) {
+			//$scope.modalatt = item;
+			console.log(item);
 			$uibModal.open({
 				animation: true,
 				templateUrl: page,
 				size: size,
-				resolve: {
-					items: function() {
-						
+				modalatt: {
+					item: function() {
 						return item;
 					}
+				},
+				controller: function($scope) {
+					$scope.name = 'top';
 				}
+
 			});
 		};
 
 	}
+
 
 })();
