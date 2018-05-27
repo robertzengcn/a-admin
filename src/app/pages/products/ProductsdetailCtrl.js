@@ -373,7 +373,7 @@
 		$scope.opensetatti = function(page, size, item) {
 			//$scope.modalatt = item;
 			console.log(item);
-			$uibModal.open({
+			var uibModalInstance=$uibModal.open({
 				animation: true,
 				templateUrl: page,
 				size: size,
@@ -382,14 +382,31 @@
 						return item;
 					}
 				},
-				controller: function($scope) {
-					$scope.name = 'top';
-				}
+				controller: 'ModalAttrCtrl',
+				resolve: {
+        		items: function () {
+          			return item;
+        		}
+     		 }
 
 			});
 		};
 
-	}
 
+
+	}
+angular.module('BlurAdmin.pages.products')
+		.controller('ModalAttrCtrl', ModalAttrCtrl);
+	function ModalAttrCtrl($uibModalInstance, items,$scope){
+		//console.log(items);
+		// var $ctrl = this;
+		 $scope.values_name=items.products_options_values_name;
+		 if(items.attributes_status==1){
+		 	 $scope.status=true;
+		 }else{
+		 	$scope.status=false;
+		 }
+		
+	}
 
 })();
