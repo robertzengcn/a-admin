@@ -8,23 +8,24 @@
   </div>
   <div class="modal-body">
 <form class="form-horizontal">
+  <input type="hidden" value="" name="optin_id" ng-model="atta_options_id" />
     <div class="form-group">
       <label class="col-md-3 control-label">Option values</label>
        <div class="col-md-4">
-   <input type="text" name="" ng-model="values_name" />
+   <input type="text" name="" ng-model="atta_options_values" />
    
  </div>
  </div>
   <div class="form-group">
   <label class="col-md-3 control-label" for="singlebutton">Attributor status</label>
   <div class="col-md-4">
-<ba-switcher switcher-style="primary" switcher-value="status"></ba-switcher>
+<ba-switcher switcher-style="primary" switcher-value="atta_status"></ba-switcher>
 </div>
   </div>
 </form>  
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-primary" ng-click="$dismiss()">Save changes</button>
+    <button type="button" class="btn btn-primary" ng-click="saveatta()">Save</button>
   </div>
 </div>
 </div>

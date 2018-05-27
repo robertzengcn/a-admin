@@ -397,16 +397,44 @@
 	}
 angular.module('BlurAdmin.pages.products')
 		.controller('ModalAttrCtrl', ModalAttrCtrl);
-	function ModalAttrCtrl($uibModalInstance, items,$scope){
+	function ModalAttrCtrl($uibModalInstance, items,$scope,$http){
 		//console.log(items);
-		// var $ctrl = this;
-		 $scope.values_name=items.products_options_values_name;
-		 if(items.attributes_status==1){
-		 	 $scope.status=true;
-		 }else{
-		 	$scope.status=false;
-		 }
-		
+		var $ctrl = this;
+		 $scope.atta_options_id=items.options_id;
+		 $scope.atta_status=true;
+	$scope.saveatta=function(){
+		if(!$scope.atta_options_id){
+			layer.alert('options error');
+			reutn false;
+		}
+		$http({
+					method: "POST",
+					url: $scope.app.host + "/Products/delproattr/",
+					data: {
+						pid: pid,
+						options_id: sname
+					},
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded'
+					},
+					transformRequest: function(obj) {
+						var str = [];
+						for (var s in obj) {
+							str.push(encodeURIComponent(s) + "=" + encodeURIComponent(obj[s]));
+						}
+						return str.join("&");
+					}
+				}).success(function(response) {
+					layer.close(index);
+					if (response.status) { //success
+
+						delete $scope.detail.attr.attrlist[sname];
+
+					} else {
+
+					}
+				});
+	}
 	}
 
 })();
