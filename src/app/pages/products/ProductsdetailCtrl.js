@@ -338,6 +338,8 @@
 					file.progress = Math.min(100, parseInt(100.0 *
 						evt.loaded / evt.total));
 				});
+			}else{
+				layer.alert('File error');
 			}
 
 		};
@@ -370,10 +372,10 @@
 		 * @param     {[type]}
 		 * @return    {[type]}
 		 */
-		$scope.opensetatti = function(page, size, item) {
+		$scope.opensetatti = function(page, size, item, pid) {
 			//$scope.modalatt = item;
 			console.log(item);
-			var uibModalInstance=$uibModal.open({
+			var uibModalInstance = $uibModal.open({
 				animation: true,
 				templateUrl: page,
 				size: size,
@@ -384,10 +386,14 @@
 				},
 				controller: 'ModalAttrCtrl',
 				resolve: {
-        		items: function () {
-          			return item;
-        		}
-     		 }
+					items: function() {
+						return item;
+					},
+					product_id: function() {
+						return pid;
+					}
+
+				}
 
 			});
 		};
@@ -395,46 +401,98 @@
 
 
 	}
-angular.module('BlurAdmin.pages.products')
+	angular.module('BlurAdmin.pages.products')
 		.controller('ModalAttrCtrl', ModalAttrCtrl);
-	function ModalAttrCtrl($uibModalInstance, items,$scope,$http){
-		//console.log(items);
+
+	function ModalAttrCtrl($uibModalInstance, items, product_id, $scope, $http,Upload,$localStorage,$timeout) {
+		console.log(items);
+		console.log(items);
 		var $ctrl = this;
-		 $scope.atta_options_id=items.options_id;
-		 $scope.atta_status=true;
-	$scope.saveatta=function(){
-		if(!$scope.atta_options_id){
-			layer.alert('options error');
-			reutn false;
-		}
-		$http({
-					method: "POST",
-					url: $scope.app.host + "/Products/delproattr/",
-					data: {
-						pid: pid,
-						options_id: sname
-					},
-					headers: {
-						'Content-Type': 'application/x-www-form-urlencoded'
-					},
-					transformRequest: function(obj) {
-						var str = [];
-						for (var s in obj) {
-							str.push(encodeURIComponent(s) + "=" + encodeURIComponent(obj[s]));
-						}
-						return str.join("&");
+		$scope.atta_options_id = items.options_id;
+		$scope.atta_status = true;
+		
+		$scope.atta_product_id = product_id;
+		$scope.atta_imgsrc=null;
+
+		$scope.saveatta = function() {
+			console.log($scope.atta_options_values);
+			if (!$scope.atta_options_values) {
+				layer.alert('options values is empty');
+				return;
+			}
+			$http({
+				method: "POST",
+				url: $scope.app.host + "/Products/delproattr/",
+				data: {
+					pid: $scope.atta_product_id,
+					options_id: $scope.atta_options_values
+				},
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded'
+				},
+				transformRequest: function(obj) {
+					var str = [];
+					for (var s in obj) {
+						str.push(encodeURIComponent(s) + "=" + encodeURIComponent(obj[s]));
 					}
-				}).success(function(response) {
-					layer.close(index);
-					if (response.status) { //success
+					return str.join("&");
+				}
+			}).success(function(response) {
+				layer.close(index);
+				if (response.status) { //success
 
-						delete $scope.detail.attr.attrlist[sname];
+					
 
-					} else {
+				} else {
 
+				}
+			});
+		};
+		/**
+		 * 添加图片,上传图片到服务端，返回图片路径
+		 * @Author    Robert      Zeng
+		 * @DateTime  2018-05-28
+		 * @copyright [copyright]
+		 * @license   [license]
+		 * @version   [version]
+		 * @return    {[type]}
+		 */
+		$scope.uploadopimg=function(file, errFiles){
+			if (file) {
+				layer.load(1);
+				file.upload = Upload.upload({
+					url: $localStorage.fileapi,
+					data: {
+						file: file
 					}
 				});
-	}
+
+				file.upload.then(function(response) {
+					$timeout(function() {
+						layer.closeAll('loading');
+						file.result = response.data;
+						//console.log(file.result);
+						if (response.data.status) { //上传图片成功
+							layer.msg('Upload image success!');
+							$scope.atta_product_img=response.data.data.path;
+							$scope.atta_imgsrc=response.data.data.url;			
+						} else {
+							layer.alert(response.data.msg);
+						}
+					});
+				}, function(response) {
+					if (response.status > 0) {
+
+						// $scope.errorMsg = response.status + ': ' + response.data;
+					}
+				}, function(evt) {
+					file.progress = Math.min(100, parseInt(100.0 *
+						evt.loaded / evt.total));
+				});
+			}else{
+				layer.alert('File error');
+			}
+		};
 	}
 
 })();
