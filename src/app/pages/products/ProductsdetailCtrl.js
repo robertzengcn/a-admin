@@ -338,7 +338,7 @@
 					file.progress = Math.min(100, parseInt(100.0 *
 						evt.loaded / evt.total));
 				});
-			}else{
+			} else {
 				layer.alert('File error');
 			}
 
@@ -404,18 +404,18 @@
 	angular.module('BlurAdmin.pages.products')
 		.controller('ModalAttrCtrl', ModalAttrCtrl);
 
-	function ModalAttrCtrl($uibModalInstance, items, product_id, $scope, $http,Upload,$localStorage,$timeout) {
-		console.log(items);
-		console.log(items);
+	function ModalAttrCtrl($uibModalInstance, items, product_id, $scope, $http, Upload, $localStorage, $timeout) {
+
+
 		var $ctrl = this;
 		$scope.atta_options_id = items.options_id;
 		$scope.atta_status = true;
-		
+
 		$scope.atta_product_id = product_id;
-		$scope.atta_imgsrc=null;
+		$scope.atta_imgsrc = null;
 
 		$scope.saveatta = function() {
-			console.log($scope.atta_options_values);
+			//console.log($scope.atta_options_values);
 			if (!$scope.atta_options_values) {
 				layer.alert('options values is empty');
 				return;
@@ -441,7 +441,7 @@
 				layer.close(index);
 				if (response.status) { //success
 
-					
+
 
 				} else {
 
@@ -457,7 +457,7 @@
 		 * @version   [version]
 		 * @return    {[type]}
 		 */
-		$scope.uploadopimg=function(file, errFiles){
+		$scope.uploadopimg = function(file, errFiles) {
 			if (file) {
 				layer.load(1);
 				file.upload = Upload.upload({
@@ -474,8 +474,8 @@
 						//console.log(file.result);
 						if (response.data.status) { //上传图片成功
 							layer.msg('Upload image success!');
-							$scope.atta_product_img=response.data.data.path;
-							$scope.atta_imgsrc=response.data.data.url;			
+							$scope.atta_product_img = response.data.data.path;
+							$scope.atta_imgsrc = response.data.data.url;
 						} else {
 							layer.alert(response.data.msg);
 						}
@@ -489,9 +489,12 @@
 					file.progress = Math.min(100, parseInt(100.0 *
 						evt.loaded / evt.total));
 				});
-			}else{
+			} else {
 				layer.alert('File error');
 			}
+		};
+		$scope.cancel = function() {
+			$uibModalInstance.dismiss('cancel');
 		};
 	}
 
