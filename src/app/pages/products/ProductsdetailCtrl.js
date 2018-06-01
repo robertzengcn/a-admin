@@ -396,6 +396,12 @@
 				}
 
 			});
+			uibModalInstance.result.then(function(selectedItem) {
+				console.log(selectedItem);
+				console.log($scope.detail.attr.attrlist[selectedItem.options_id]);
+			}, function() {
+				$log.info('Modal dismissed at: ' + new Date());
+			});
 		};
 
 
@@ -416,16 +422,23 @@
 
 		$scope.saveatta = function() {
 			//console.log($scope.atta_options_values);
+			var index = layer.load();
 			if (!$scope.atta_options_values) {
 				layer.alert('options values is empty');
 				return;
 			}
+			if(!$scope.atta_product_img){
+				$scope.atta_product_img=null;
+			}
 			$http({
 				method: "POST",
-				url: $scope.app.host + "/Products/delproattr/",
+				url: $scope.app.host + "/Products/addoptionvalues/",
 				data: {
 					pid: $scope.atta_product_id,
-					options_id: $scope.atta_options_values
+					options_id: $scope.atta_options_id,
+					options_values:$scope.atta_options_values,
+					attributes_image:$scope.atta_product_img,
+					attributes_status:$scope.atta_status
 				},
 				headers: {
 					'Content-Type': 'application/x-www-form-urlencoded'
@@ -438,10 +451,23 @@
 					return str.join("&");
 				}
 			}).success(function(response) {
-				layer.close(index);
+				layer.closeAll('loading');
 				if (response.status) { //success
+					var reitem={};
+					//reitem.pid=$scope.atta_product_id;
+					reitem.options_id=$scope.atta_options_id;
+					reitem.options_values=$scope.atta_options_values;
+					reitem.attributes_image=$scope.atta_product_img;
+					if($scope.atta_status){
+						reitem.attributes_status=1;
+					}else{
+					reitem.attributes_status=0;	
+					}
+					reitem.fullimage=$scope.atta_imgsrc;
+					reitem.options_values_id=response.data.options_values_id;
+					reitem.attributes_id=response.data.products_attributes_id;
 
-
+					$uibModalInstance.close(reitem);
 
 				} else {
 
