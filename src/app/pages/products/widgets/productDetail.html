@@ -263,7 +263,11 @@
                             <td>{{sitem.products_options_values_name}}</td>
                             <td>{{sitem.products_options_types_name}}</td>
                             <td><img ng-if="sitem.fullimage!=null" src="{{sitem.fullimage}}" width="100px" height="100px" /></td>
-                            <td>{{sitem.attributes_status?'ON':'OFF'}}</td>
+                            <td [sitem.attributes_status]={sitem.attributes_status?true:false}>
+                            
+                              <ba-switcher switcher-style="primary" switcher-value="sitem.attributes_status"></ba-switcher>
+                              
+                            </td>
                             <td>
                           
                               <button type="file" class="btn btn-info" ng-if="sitem.products_options_types_name=='Radio'" ngf-select="uplpoadattrimg($file, $invalidFiles,detail.products_id,sitem.products_attributes_id,ikey,$index)">UPload Image</button> <button class="btn btn-success" ng-click="deleattitem(detail.products_id,sitem.options_values_id,ikey,$index)">Delete</button>                             

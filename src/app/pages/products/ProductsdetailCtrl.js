@@ -399,8 +399,10 @@
 			uibModalInstance.result.then(function(selectedItem) {
 				console.log(selectedItem);
 				console.log($scope.detail.attr.attrlist[selectedItem.options_id]);
+			$scope.detail.attr.attrlist[selectedItem.options_id].push(selectedItem);
+			console.log($scope.detail.attr.attrlist[selectedItem.options_id]);
 			}, function() {
-				$log.info('Modal dismissed at: ' + new Date());
+				//$log.info('Modal dismissed at: ' + new Date());
 			});
 		};
 
@@ -458,6 +460,7 @@
 					reitem.options_id=$scope.atta_options_id;
 					reitem.options_values=$scope.atta_options_values;
 					reitem.attributes_image=$scope.atta_product_img;
+					console.log($scope.atta_status);
 					if($scope.atta_status){
 						reitem.attributes_status=1;
 					}else{
@@ -465,8 +468,11 @@
 					}
 					reitem.fullimage=$scope.atta_imgsrc;
 					reitem.options_values_id=response.data.options_values_id;
-					reitem.attributes_id=response.data.products_attributes_id;
-
+					reitem.products_attributes_id=response.data.products_attributes_id;
+					reitem.products_options_name=items.products_options_name;
+					reitem.products_options_type=items.products_options_type;
+					reitem.products_options_types_name=items.products_options_types_name;
+					reitem.products_options_values_name=$scope.atta_options_values;
 					$uibModalInstance.close(reitem);
 
 				} else {
