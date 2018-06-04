@@ -404,6 +404,14 @@
 			}, function() {
 				//$log.info('Modal dismissed at: ' + new Date());
 			});
+
+		};
+		/**
+		 * @param  {[newattr]} string 新的属性
+		 * @return {[type]}
+		 */
+		$scope.addattribtn=function(newattr){
+
 		};
 
 
@@ -460,12 +468,7 @@
 					reitem.options_id=$scope.atta_options_id;
 					reitem.options_values=$scope.atta_options_values;
 					reitem.attributes_image=$scope.atta_product_img;
-					console.log($scope.atta_status);
-					if($scope.atta_status){
-						reitem.attributes_status=1;
-					}else{
-					reitem.attributes_status=0;	
-					}
+					
 					reitem.fullimage=$scope.atta_imgsrc;
 					reitem.options_values_id=response.data.options_values_id;
 					reitem.products_attributes_id=response.data.products_attributes_id;
@@ -476,7 +479,7 @@
 					$uibModalInstance.close(reitem);
 
 				} else {
-
+					layer.alert(response.msg);
 				}
 			});
 		};
