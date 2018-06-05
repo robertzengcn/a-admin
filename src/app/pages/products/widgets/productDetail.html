@@ -288,14 +288,15 @@
  <div class="marn60">
    <label class="col-md-2 control-label" for="product_description">Add Attributor</label>
 <div class="col-md-8">  
- <input type="text" id="attributor_name"  ng-model="newattr" /><select>
-  <option value="0" selected="selected">Dropdown</option>
+ <input type="text" id="attributor_name"  ng-model="newattr" />
+ <select ng-model="newattrtype" ng-init="newattrtype='0'">
+<option value="0" >Dropdown</option>
 <option value="1">Text</option>
 <option value="2">Radio</option>
 <option value="3">Checkbox</option>
 <option value="4">File</option>
 <option value="5">Read Only</option>
-</select><button ng-click="addattribtn(newattr)"> <span class="glyphicon glyphicon-trash"></span> Add</button>
+</select><button ng-click="addattribtn(newattr,newattrtype)"> <span class="glyphicon glyphicon-trash"></span> Add</button>
 
  </div>
 </div>

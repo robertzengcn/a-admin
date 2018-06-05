@@ -260,6 +260,7 @@
 		};
 
 
+
 		/**
 		 * 上传图片并设置产品属性图片
 		 * @Author    Robert      Zeng
@@ -410,7 +411,39 @@
 		 * @param  {[newattr]} string 新的属性
 		 * @return {[type]}
 		 */
-		$scope.addattribtn=function(newattr){
+		$scope.addattribtn=function(newattr,newattrtype){
+			if(!newattr){
+				layer.alert('attributes name is empty');
+				return;
+			}
+			layer.load(1);
+			$http({
+					method: "POST",
+					url: $scope.app.host + "/Products/addoption/",
+					data: {						
+						options_values: newattr,
+						type:newattrtype
+					},
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded'
+					},
+					transformRequest: function(obj) {
+						var str = [];
+						for (var s in obj) {
+							str.push(encodeURIComponent(s) + "=" + encodeURIComponent(obj[s]));
+						}
+						return str.join("&");
+					}
+				}).success(function(response) {
+					layer.closeAll('loading');
+					if (response.status){ //success
+
+						$scope.detail.attr.attrlist[response.data.products_options_id]=[];
+						//console.log($scope.detail.attr.attrlist);
+					} else {
+
+					}
+				});
 
 		};
 
