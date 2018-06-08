@@ -151,12 +151,18 @@
 			console.info('onCompleteAll');
 		};
 
+		   $scope.availableOptions=[
+      {id: '0', name: 'Dropdown'},
+      {id: '1', name: 'Text'},
+      {id: '2', name: 'Radio'},
+      {id: '3', name: 'Checkbox'},
+      {id: '4', name: 'File'},
+      {id: '5', name: 'Read Only'},
+    ];
+
+    $scope.newattrtype=$scope.availableOptions[0];
 
 
-		//添加产品属性
-		$scope.addattri = function() {
-
-		};
 		//console.log($scope.detail.attr.length);
 		$scope.getattrlen = function(jsonData) {
 			var jsonLength = 0;
@@ -344,24 +350,7 @@
 			}
 
 		};
-		/**
-		 * @Author    Robert      Zeng
-		 * @DateTime  2018-05-24
-		 * @copyright [copyright]
-		 * @license   [license]
-		 * @version   [version]
-		 * @param     {[number]} key 要添加元素的属性id
-		 * @return    {[type]}
-		 */
-		$scope.addattitem = function(keys) {
 
-
-			var attritem = {};
-
-
-
-			//$scope.detail.attr.attrlist[keys].push();
-		};
 		/**
 		 * 打开模态窗口
 		 * @Author    Robert      Zeng
@@ -416,13 +405,14 @@
 				layer.alert('attributes name is empty');
 				return;
 			}
+			console.log(newattrtype);
 			layer.load(1);
 			$http({
 					method: "POST",
 					url: $scope.app.host + "/Products/addoption/",
 					data: {						
 						options_values: newattr,
-						type:newattrtype
+						type:newattrtype.id
 					},
 					headers: {
 						'Content-Type': 'application/x-www-form-urlencoded'
@@ -438,8 +428,17 @@
 					layer.closeAll('loading');
 					if (response.status){ //success
 
+						$scope.detail.attr.optlist[response.data.products_options_id]=newattr;
 						$scope.detail.attr.attrlist[response.data.products_options_id]=[];
 						//console.log($scope.detail.attr.attrlist);
+						var sitems={};
+						sitems.options_id=response.data.products_options_id;
+						sitems.products_options_name=newattr;
+						sitems.products_options_type=newattrtype.id;
+						console.log($scope.availableOptions);
+						sitems.products_options_types_name=newattrtype.name;
+						
+						$scope.opensetatti('app/pages/products/widgets/addattModal.html', 'sm',sitems,$scope.detail.products_id);
 					} else {
 
 					}
@@ -473,6 +472,10 @@
 			if(!$scope.atta_product_img){
 				$scope.atta_product_img=null;
 			}
+			var sattrstu=1;
+			if(!$scope.atta_status){
+				$scope.atta_status=0;
+			}
 			$http({
 				method: "POST",
 				url: $scope.app.host + "/Products/addoptionvalues/",
@@ -481,7 +484,7 @@
 					options_id: $scope.atta_options_id,
 					options_values:$scope.atta_options_values,
 					attributes_image:$scope.atta_product_img,
-					attributes_status:$scope.atta_status
+					attributes_status:sattrstu
 				},
 				headers: {
 					'Content-Type': 'application/x-www-form-urlencoded'
@@ -509,6 +512,7 @@
 					reitem.products_options_type=items.products_options_type;
 					reitem.products_options_types_name=items.products_options_types_name;
 					reitem.products_options_values_name=$scope.atta_options_values;
+					reitem.attributes_status=$scope.atta_status;
 					$uibModalInstance.close(reitem);
 
 				} else {
