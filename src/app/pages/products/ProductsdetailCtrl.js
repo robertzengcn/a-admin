@@ -396,6 +396,7 @@
 			});
 
 		};
+
 		/**
 		 * @param  {[newattr]} string 新的属性
 		 * @return {[type]}
@@ -445,8 +446,45 @@
 				});
 
 		};
+		/**
+		 * 属性值的改变方法
+		 * @Author    Robert      Zeng
+		 * @DateTime  2018-06-11
+		 * @copyright [copyright]
+		 * @license   [license]
+		 * @version   [version]
+		 * @return    {[type]}
+		 */
+		$scope.changestatus=function(item,status){
+			console.log('clickit');
+				$http({
+					method: "POST",
+					url: $scope.app.host + "/Products/cattrstatus/",
+					data: {
+						attr: item,
+						status: status
+					},
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded'
+					},
+					transformRequest: function(obj) {
+						var str = [];
+						for (var s in obj) {
+							str.push(encodeURIComponent(s) + "=" + encodeURIComponent(obj[s]));
+						}
+						return str.join("&");
+					}
+				}).success(function(response) {
+					layer.close(index);
+					if (response.status) { //success
 
+						delete $scope.detail.attr.attrlist[sname];
 
+					} else {
+
+					}
+				});
+		};
 
 	}
 	angular.module('BlurAdmin.pages.products')

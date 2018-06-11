@@ -15,7 +15,7 @@
       scope: {
         switcherStyle: '@',
         switcherValue: '=',
-        switcherexe:'<',
+        switcherexe:'&',
       }
     };
   }

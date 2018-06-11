@@ -263,9 +263,9 @@
                             <td>{{sitem.products_options_values_name}}</td>
                             <td>{{sitem.products_options_types_name}}</td>
                             <td><img ng-if="sitem.fullimage!=null" src="{{sitem.fullimage}}" width="100px" height="100px" /></td>
-                            <td [sitem.attributes_status]={sitem.attributes_status?true:false}>
+                            <td>
                             
-                              <ba-switcher switcher-style="primary" switcher-value="sitem.attributes_status"></ba-switcher>
+                              <ba-switcher switcher-style="primary" switcher-value="sitem.attributes_status" switcherexe="changestatus(sitem.products_attributes_id)"></ba-switcher>
                               
                             </td>
                             <td>
