@@ -456,10 +456,12 @@
 		 * @return    {[type]}
 		 */
 		$scope.changestatus=function(item,status){
-			console.log('clickit');
+
+			console.log(status);
+			layer.load(1);
 				$http({
 					method: "POST",
-					url: $scope.app.host + "/Products/cattrstatus/",
+					url: $scope.app.host + "/Products/chattrstatus/",
 					data: {
 						attr: item,
 						status: status
@@ -475,10 +477,10 @@
 						return str.join("&");
 					}
 				}).success(function(response) {
-					layer.close(index);
+					layer.closeAll('loading');
 					if (response.status) { //success
 
-						delete $scope.detail.attr.attrlist[sname];
+						
 
 					} else {
 
