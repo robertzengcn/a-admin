@@ -1,4 +1,4 @@
-<form class="form-horizontal">
+<form class="form-horizontal" ng-submit="processForm()">
 <fieldset>
 
 <!-- Text input-->
@@ -26,7 +26,7 @@
 <div class="form-group">
   <label class="col-md-2 control-label" for="product_categorie">PRODUCT CATEGORY</label>
   <div class="col-md-8">
-    <select id="product_categorie" name="product_categorie" class="form-control" ng-options="value.categories_id as value.categories_name group by value.parent for (key,value) in cateloguelist" ng-model="detail.master_categories_id">
+    <select id="master_categories_id" name="master_categories_id" class="form-control" ng-options="value.categories_id as value.categories_name group by value.parent for (key,value) in cateloguelist" ng-model="detail.master_categories_id">
     </select>
   </div>
 </div>
@@ -46,6 +46,28 @@
   <div class="col-md-8">
   <input id="product_weight" name="product_weight" placeholder="PRODUCT WEIGHT" class="form-control input-md" required="" type="text" ng-model="detail.products_weight">
     
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-2 control-label" for="products_model">PRODUCT Model</label>  
+  <div class="col-md-8">
+  <input id="products_model" name="products_model" placeholder="PRODUCT Model" class="form-control input-md" required="" type="text" ng-model="detail.products_model">
+    
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-2 control-label" for="origin_url">Origin Url</label>  
+  <div class="col-md-8">
+  <input id="origin_url" name="origin_url" placeholder="Origin Url" class="form-control input-md" required="" type="url" ng-model="detail.origin_url">    
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-2 control-label" for="commission_rate">Commission Rate</label>  
+  <div class="col-md-8">
+  <input id="commission_rate" name="commission_rate" placeholder="Commission Rate" class="form-control input-md" required="" type="number" max="90" ng-model="detail.commission_rate" />    
   </div>
 </div>
 
@@ -220,7 +242,36 @@
  </div>
 </div>
 
-
+<!--product meta start-->
+<div class="panel panel-default">
+  <div class="panel-heading">
+       SEO Information
+    </div>
+    <div class="panel-body">
+<div class="form-group">
+  <label class="col-md-2 control-label" for="product_weight">SEO Title</label>  
+  <div class="col-md-8">
+  <input id="metatags_title" name="metatags_title" placeholder="SEO Title" class="form-control input-md" required="" type="text" ng-model="detail.meta.metatags_title">
+    
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-md-2 control-label" for="product_weight">SEO Keyword</label>  
+  <div class="col-md-8">
+  <input id="metatags_keywords" name="metatags_keywords" placeholder="SEO Keyword" class="form-control input-md" required="" type="text" ng-model="detail.meta.metatags_keywords">
+    
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-md-2 control-label" for="metatags_description">SEO Description </label>  
+  <div class="col-md-8">
+  <input id="metatags_description" name="metatags_description" placeholder="SEO Description" class="form-control input-md" required="" type="text" ng-model="detail.meta.metatags_description">
+    
+  </div>
+</div>
+  </div>
+</div>
+<!--product meta end-->
 
 
 
@@ -230,7 +281,7 @@
 <div class="form-group">
   <label class="col-md-2 control-label" for="singlebutton"></label>
   <div class="col-md-8">
-    <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
+    <button id="singlebutton" name="singlebutton" class="btn btn-primary" type="submit">Submit</button>
   </div>
   </div>
 

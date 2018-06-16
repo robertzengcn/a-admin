@@ -151,16 +151,27 @@
 			console.info('onCompleteAll');
 		};
 
-		   $scope.availableOptions=[
-      {id: '0', name: 'Dropdown'},
-      {id: '1', name: 'Text'},
-      {id: '2', name: 'Radio'},
-      {id: '3', name: 'Checkbox'},
-      {id: '4', name: 'File'},
-      {id: '5', name: 'Read Only'},
-    ];
+		$scope.availableOptions = [{
+			id: '0',
+			name: 'Dropdown'
+		}, {
+			id: '1',
+			name: 'Text'
+		}, {
+			id: '2',
+			name: 'Radio'
+		}, {
+			id: '3',
+			name: 'Checkbox'
+		}, {
+			id: '4',
+			name: 'File'
+		}, {
+			id: '5',
+			name: 'Read Only'
+		}, ];
 
-    $scope.newattrtype=$scope.availableOptions[0];
+		$scope.newattrtype = $scope.availableOptions[0];
 
 
 		//console.log($scope.detail.attr.length);
@@ -389,8 +400,8 @@
 			uibModalInstance.result.then(function(selectedItem) {
 				console.log(selectedItem);
 				console.log($scope.detail.attr.attrlist[selectedItem.options_id]);
-			$scope.detail.attr.attrlist[selectedItem.options_id].push(selectedItem);
-			console.log($scope.detail.attr.attrlist[selectedItem.options_id]);
+				$scope.detail.attr.attrlist[selectedItem.options_id].push(selectedItem);
+				console.log($scope.detail.attr.attrlist[selectedItem.options_id]);
 			}, function() {
 				//$log.info('Modal dismissed at: ' + new Date());
 			});
@@ -401,49 +412,49 @@
 		 * @param  {[newattr]} string 新的属性
 		 * @return {[type]}
 		 */
-		$scope.addattribtn=function(newattr,newattrtype){
-			if(!newattr){
+		$scope.addattribtn = function(newattr, newattrtype) {
+			if (!newattr) {
 				layer.alert('attributes name is empty');
 				return;
 			}
 			console.log(newattrtype);
 			layer.load(1);
 			$http({
-					method: "POST",
-					url: $scope.app.host + "/Products/addoption/",
-					data: {						
-						options_values: newattr,
-						type:newattrtype.id
-					},
-					headers: {
-						'Content-Type': 'application/x-www-form-urlencoded'
-					},
-					transformRequest: function(obj) {
-						var str = [];
-						for (var s in obj) {
-							str.push(encodeURIComponent(s) + "=" + encodeURIComponent(obj[s]));
-						}
-						return str.join("&");
+				method: "POST",
+				url: $scope.app.host + "/Products/addoption/",
+				data: {
+					options_values: newattr,
+					type: newattrtype.id
+				},
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded'
+				},
+				transformRequest: function(obj) {
+					var str = [];
+					for (var s in obj) {
+						str.push(encodeURIComponent(s) + "=" + encodeURIComponent(obj[s]));
 					}
-				}).success(function(response) {
-					layer.closeAll('loading');
-					if (response.status){ //success
+					return str.join("&");
+				}
+			}).success(function(response) {
+				layer.closeAll('loading');
+				if (response.status) { //success
 
-						$scope.detail.attr.optlist[response.data.products_options_id]=newattr;
-						$scope.detail.attr.attrlist[response.data.products_options_id]=[];
-						//console.log($scope.detail.attr.attrlist);
-						var sitems={};
-						sitems.options_id=response.data.products_options_id;
-						sitems.products_options_name=newattr;
-						sitems.products_options_type=newattrtype.id;
-						console.log($scope.availableOptions);
-						sitems.products_options_types_name=newattrtype.name;
-						
-						$scope.opensetatti('app/pages/products/widgets/addattModal.html', 'sm',sitems,$scope.detail.products_id);
-					} else {
+					$scope.detail.attr.optlist[response.data.products_options_id] = newattr;
+					$scope.detail.attr.attrlist[response.data.products_options_id] = [];
+					//console.log($scope.detail.attr.attrlist);
+					var sitems = {};
+					sitems.options_id = response.data.products_options_id;
+					sitems.products_options_name = newattr;
+					sitems.products_options_type = newattrtype.id;
+					console.log($scope.availableOptions);
+					sitems.products_options_types_name = newattrtype.name;
 
-					}
-				});
+					$scope.opensetatti('app/pages/products/widgets/addattModal.html', 'sm', sitems, $scope.detail.products_id);
+				} else {
+
+				}
+			});
 
 		};
 		/**
@@ -455,35 +466,68 @@
 		 * @version   [version]
 		 * @return    {[type]}
 		 */
-		$scope.changestatus=function(item,status){
+		$scope.changestatus = function(item, status) {
 
 			console.log(status);
 			layer.load(1);
-				$http({
-					method: "POST",
-					url: $scope.app.host + "/Products/chattrstatus/",
-					data: {
-						attr: item,
-						status: status
-					},
+			$http({
+				method: "POST",
+				url: $scope.app.host + "/Products/chattrstatus/",
+				data: {
+					attr: item,
+					status: status
+				},
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded'
+				},
+				transformRequest: function(obj) {
+					var str = [];
+					for (var s in obj) {
+						str.push(encodeURIComponent(s) + "=" + encodeURIComponent(obj[s]));
+					}
+					return str.join("&");
+				}
+			}).success(function(response) {
+				layer.closeAll('loading');
+				if (response.status) { //success
+
+
+				} else {
+
+				}
+			});
+		};
+		/**
+		 * 提交表单
+		 * @Author    Robert      Zeng
+		 * @DateTime  2018-06-14
+		 * @copyright [copyright]
+		 * @license   [license]
+		 * @version   [version]
+		 * @return    {[type]}    [description]
+		 */
+		$scope.processForm = function() {
+			layer.load(1);
+			
+			$http({
+					method: 'POST',
+					url: $scope.app.host + "/Products/save/",
+					data: $.param($scope.detail), // pass in data as strings
 					headers: {
 						'Content-Type': 'application/x-www-form-urlencoded'
-					},
-					transformRequest: function(obj) {
-						var str = [];
-						for (var s in obj) {
-							str.push(encodeURIComponent(s) + "=" + encodeURIComponent(obj[s]));
-						}
-						return str.join("&");
-					}
-				}).success(function(response) {
+					} // set the headers so angular passing info as form data (not request payload)
+				})
+				.success(function(data) {
 					layer.closeAll('loading');
-					if (response.status) { //success
+					console.log(data);
 
-						
-
+					if (!data.success) {
+						// if not successful, bind errors to error variables
+						$scope.errorName = data.errors.name;
+						$scope.errorSuperhero = data.errors.superheroAlias;
 					} else {
-
+						// if successful, bind success message to message
+						$scope.message = data.message;
 					}
 				});
 		};
@@ -509,12 +553,12 @@
 				layer.alert('options values is empty');
 				return;
 			}
-			if(!$scope.atta_product_img){
-				$scope.atta_product_img=null;
+			if (!$scope.atta_product_img) {
+				$scope.atta_product_img = null;
 			}
-			var sattrstu=1;
-			if(!$scope.atta_status){
-				$scope.atta_status=0;
+			var sattrstu = 1;
+			if (!$scope.atta_status) {
+				$scope.atta_status = 0;
 			}
 			$http({
 				method: "POST",
@@ -522,9 +566,9 @@
 				data: {
 					pid: $scope.atta_product_id,
 					options_id: $scope.atta_options_id,
-					options_values:$scope.atta_options_values,
-					attributes_image:$scope.atta_product_img,
-					attributes_status:sattrstu
+					options_values: $scope.atta_options_values,
+					attributes_image: $scope.atta_product_img,
+					attributes_status: sattrstu
 				},
 				headers: {
 					'Content-Type': 'application/x-www-form-urlencoded'
@@ -539,20 +583,20 @@
 			}).success(function(response) {
 				layer.closeAll('loading');
 				if (response.status) { //success
-					var reitem={};
+					var reitem = {};
 					//reitem.pid=$scope.atta_product_id;
-					reitem.options_id=$scope.atta_options_id;
-					reitem.options_values=$scope.atta_options_values;
-					reitem.attributes_image=$scope.atta_product_img;
-					
-					reitem.fullimage=$scope.atta_imgsrc;
-					reitem.options_values_id=response.data.options_values_id;
-					reitem.products_attributes_id=response.data.products_attributes_id;
-					reitem.products_options_name=items.products_options_name;
-					reitem.products_options_type=items.products_options_type;
-					reitem.products_options_types_name=items.products_options_types_name;
-					reitem.products_options_values_name=$scope.atta_options_values;
-					reitem.attributes_status=$scope.atta_status;
+					reitem.options_id = $scope.atta_options_id;
+					reitem.options_values = $scope.atta_options_values;
+					reitem.attributes_image = $scope.atta_product_img;
+
+					reitem.fullimage = $scope.atta_imgsrc;
+					reitem.options_values_id = response.data.options_values_id;
+					reitem.products_attributes_id = response.data.products_attributes_id;
+					reitem.products_options_name = items.products_options_name;
+					reitem.products_options_type = items.products_options_type;
+					reitem.products_options_types_name = items.products_options_types_name;
+					reitem.products_options_values_name = $scope.atta_options_values;
+					reitem.attributes_status = $scope.atta_status;
 					$uibModalInstance.close(reitem);
 
 				} else {
