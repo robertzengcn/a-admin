@@ -116,10 +116,16 @@
           return promise;
 
       };
+      var getproductmodel=function(){
+        var model={};
+        model.data={};
+        return model;
+      };
       return {
         getproductlist: getproductlist,
         getproduct:getproduct,
         getcateloguelist:getcateloguelist,
+        getproductmodel:getproductmodel
       };
 
     }]);

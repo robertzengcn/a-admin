@@ -45,6 +45,22 @@
               return ProductService.getcateloguelist();
             }
           }       
+        }).state('products.create',{
+          url: '/create/', 
+          templateUrl: 'app/pages/products/widgets/productDetail.html',
+          title: 'Create Product',
+            sidebarMeta: {
+            order: 110,
+          },
+          controller: 'ProductsdetailCtrl',
+          resolve: {
+            productmodels:function($stateParams,ProductService){
+             return ProductService.getproductmodel();
+            },
+            cateloguelist:function(ProductService){
+              return ProductService.getcateloguelist();
+            }
+          } 
         });
          $urlRouterProvider.when('/products','/products/list');
   }

@@ -1,11 +1,19 @@
 <form class="form-horizontal" ng-submit="processForm()">
 <fieldset>
 
-<!-- Text input-->
+<!-- Button -->
 <div class="form-group">
+  <label class="col-md-2 control-label" for="singlebutton"></label>
+  <div class="col-md-8">
+    <button id="singlebutton" name="singlebutton" class="btn btn-primary" type="submit">Submit</button>
+  </div>
+  </div>  
+
+<!-- Text input-->
+<div class="form-group" ng-if="detail.products_id">
   <label class="col-md-2 control-label" for="product_id">PRODUCT ID</label>  
   <div class="col-md-8">
-  <input id="product_id" name="product_id" placeholder="PRODUCT ID" class="form-control input-md" required="" type="text" ng-model="detail.products_id">
+  <input id="product_id" name="product_id" placeholder="PRODUCT ID" class="form-control input-md" required="" type="text" ng-model="detail.products_id"  readonly="readonly" />
     
   </div>
 </div>
@@ -35,7 +43,7 @@
 <div class="form-group">
   <label class="col-md-2 control-label" for="available_quantity">AVAILABLE QUANTITY</label>  
   <div class="col-md-8">
-  <input id="available_quantity" name="available_quantity" placeholder="AVAILABLE QUANTITY" class="form-control input-md" required="" type="text" ng-model="detail.products_quantity">
+  <input id="available_quantity" name="available_quantity" placeholder="AVAILABLE QUANTITY" class="form-control input-md" required="" type="number" ng-model="detail.products_quantity" min=0 max="9999999" />
     
   </div>
 </div>
@@ -60,7 +68,7 @@
 <div class="form-group">
   <label class="col-md-2 control-label" for="origin_url">Origin Url</label>  
   <div class="col-md-8">
-  <input id="origin_url" name="origin_url" placeholder="Origin Url" class="form-control input-md" required="" type="url" ng-model="detail.origin_url">    
+  <input id="origin_url" name="origin_url" placeholder="Origin Url" class="form-control input-md"  type="url" ng-model="detail.origin_url">    
   </div>
 </div>
 
@@ -169,7 +177,7 @@
     <tbody id="imagelist_body">
 
       <tr ng-repeat="item in detail.image_list track by $index">
-        <td><img ng-src="{{item.fullurl}}" width="50px" height="50px" /><input type="hidden" ng-model="item.image"></td><td><input ng-model="item.num" name="image_list[]"></td><td><button ng-click="deleteimage($index)">delete</button></td>
+        <td><img ng-src="{{item.fullurl}}" width="50px" height="50px" /><input type="hidden" ng-model="item.image"></td><td><input ng-model="item.num" name="image_list[]"></td><td><button ng-click="deleteimage($index)" type="button">delete</button></td>
       </tr>
        
     </tbody>

@@ -15,7 +15,7 @@
 <tr ng-repeat="row in mc.displayed">
     <td>{{$index+1}}</td>
     <td>{{row.products_name}}</td>
-    <td>{{row.products_image}}</td>
+    <td><img ng-src="{{row.products_image_url}}" class="img-thumbnail hundeimg" /></td>
     <td>{{row.products_model}}</td>
     <td>{{row.products_price}}</td>
     <td>{{row.products_quantity}}</td>

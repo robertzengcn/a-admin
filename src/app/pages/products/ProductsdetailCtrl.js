@@ -21,9 +21,16 @@
 		//$httpProvider.defaults.headers.common = { 'My-Header' : 'value' };
 
 		$scope.detail = productmodels.data;
-		console.log($scope.detail.full_products_image);
-		$scope.cateloguelist = cateloguelist.data;
 
+		
+		$scope.cateloguelist = cateloguelist.data;
+		if(!$scope.detail.products_id){//新建产品
+			$scope.detail.products_status=true;
+
+		if(!$scope.detail.master_categories_id){
+			$scope.detail.master_categories_id=$scope.cateloguelist[0].categories_id;//赋予默认值
+		}
+		}
 		//配置ueditor
 		$scope.config = {
 			serverUrl: $localStorage.ueapi,
@@ -521,13 +528,12 @@
 					layer.closeAll('loading');
 					console.log(data);
 
-					if (!data.success) {
+					if (data.status) {
 						// if not successful, bind errors to error variables
-						$scope.errorName = data.errors.name;
-						$scope.errorSuperhero = data.errors.superheroAlias;
+						layer.alert('Update success');
 					} else {
 						// if successful, bind success message to message
-						$scope.message = data.message;
+						layer.alert(data.msg);
 					}
 				});
 		};
