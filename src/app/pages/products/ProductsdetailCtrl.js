@@ -30,6 +30,7 @@
 		if(!$scope.detail.master_categories_id){
 			$scope.detail.master_categories_id=$scope.cateloguelist[0].categories_id;//赋予默认值
 		}
+		$scope.detail.image_list=[];
 		}
 		//配置ueditor
 		$scope.config = {
