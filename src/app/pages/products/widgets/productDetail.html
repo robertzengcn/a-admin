@@ -20,7 +20,7 @@
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-2 control-label" for="product_name">PRODUCT NAME</label>  
+  <label class="col-md-2 control-label" for="product_name">PRODUCT NAME <span class="requirspan">*</span></label>  
   <div class="col-md-8">
   <input id="product_name" name="product_name" placeholder="PRODUCT NAME" class="form-control input-md" required="" type="text" ng-model="detail.products_name">
     
@@ -29,7 +29,7 @@
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-2 control-label" for="product_price">PRODUCT PRICE</label>  
+  <label class="col-md-2 control-label" for="product_price">PRODUCT PRICE<span class="requirspan">*</span></label>  
   <div class="col-md-8">
   <input id="product_price" name="product_price" placeholder="PRODUCT PRICE" class="form-control input-md" required="" type="text" ng-model="detail.products_price">
     
@@ -50,7 +50,7 @@
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-2 control-label" for="available_quantity">AVAILABLE QUANTITY</label>  
+  <label class="col-md-2 control-label" for="available_quantity">AVAILABLE QUANTITY<span class="requirspan">*</span></label>  
   <div class="col-md-8">
   <input id="available_quantity" name="available_quantity" placeholder="AVAILABLE QUANTITY" class="form-control input-md" required="" type="number" ng-model="detail.products_quantity" min=0 max="9999999" />
     
@@ -59,7 +59,7 @@
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-2 control-label" for="product_weight">PRODUCT WEIGHT</label>  
+  <label class="col-md-2 control-label" for="product_weight">PRODUCT WEIGHT<span class="requirspan">*</span></label>  
   <div class="col-md-8">
   <input id="product_weight" name="product_weight" placeholder="PRODUCT WEIGHT" class="form-control input-md" required="" type="text" ng-model="detail.products_weight">
     
@@ -69,7 +69,7 @@
 <div class="form-group">
   <label class="col-md-2 control-label" for="products_model">PRODUCT Model</label>  
   <div class="col-md-8">
-  <input id="products_model" name="products_model" placeholder="PRODUCT Model" class="form-control input-md" required="" type="text" ng-model="detail.products_model">
+  <input id="products_model" name="products_model" placeholder="PRODUCT Model, leave empty system will auto generate" class="form-control input-md" required="" type="text" ng-model="detail.products_model">
     
   </div>
 </div>
@@ -97,7 +97,7 @@
 </div>
   </div>
 <div class="form-group">
-   <label class="col-md-2 control-label" for="singlebutton">Product image</label>
+   <label class="col-md-2 control-label" for="singlebutton">Product image<span class="requirspan">*</span></label>
   <div class="col-md-4  no-padding productimage">
         <img ng-src="{{detail.full_products_image}}" class="human-picture">
   </div>
@@ -164,7 +164,7 @@
 
  <!-- Textarea -->
 <div class="form-group">
-  <label class="col-md-2 control-label" for="product_description">PRODUCT DESCRIPTION</label>
+  <label class="col-md-2 control-label" for="product_description">PRODUCT DESCRIPTION<span class="requirspan">*</span></label>
   <div class="col-md-8">                     
     <div class="ueditor" id="product_description" name="product_description" ng-model="detail.products_description" config="config" ready="ready"></div>
   </div>
