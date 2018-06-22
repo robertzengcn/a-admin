@@ -31,6 +31,9 @@
 			$scope.detail.master_categories_id=$scope.cateloguelist[0].categories_id;//赋予默认值
 		}
 		$scope.detail.image_list=[];
+		$scope.detail.attr={};
+		$scope.detail.attr.optlist=[];
+		$scope.detail.attr.attrlist=[];
 		}
 		//配置ueditor
 		$scope.config = {
@@ -142,12 +145,14 @@
 			console.log(status);
 			if (response.status) {
 				var sizes = $scope.detail.image_list.length + 1;
-				var nimages = [];
+				var nimages = {};
 				nimages.fullurl = response.data.url;
 				nimages.image = response.data.path;
 				nimages.num = sizes;
 				//nimages.image=response.data;
+				console.log(nimages);
 				$scope.detail.image_list.push(nimages);
+				console.log($scope.detail.image_list);
 			} else {
 
 				layer.alert(response.msg);
@@ -516,11 +521,14 @@
 		 */
 		$scope.processForm = function() {
 			layer.load(1);
-			
+			console.log($scope.detail);
+			console.log($scope.detail.image_list);
+		console.log($.param($scope.detail));
 			$http({
 					method: 'POST',
 					url: $scope.app.host + "/Products/save/",
 					data: $.param($scope.detail), // pass in data as strings
+					
 					headers: {
 						'Content-Type': 'application/x-www-form-urlencoded'
 					} // set the headers so angular passing info as form data (not request payload)

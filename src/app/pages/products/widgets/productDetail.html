@@ -69,7 +69,7 @@
 <div class="form-group">
   <label class="col-md-2 control-label" for="products_model">PRODUCT Model</label>  
   <div class="col-md-8">
-  <input id="products_model" name="products_model" placeholder="PRODUCT Model, leave empty system will auto generate" class="form-control input-md" required="" type="text" ng-model="detail.products_model">
+  <input id="products_model" name="products_model" placeholder="PRODUCT Model, leave empty system will auto generate" class="form-control input-md"  type="text" ng-model="detail.products_model">
     
   </div>
 </div>
@@ -84,7 +84,7 @@
 <div class="form-group">
   <label class="col-md-2 control-label" for="commission_rate">Commission Rate</label>  
   <div class="col-md-8">
-  <input id="commission_rate" name="commission_rate" placeholder="Commission Rate" class="form-control input-md" required="" type="number" max="90" ng-model="detail.commission_rate" />    
+  <input id="commission_rate" name="commission_rate" placeholder="Commission Rate" class="form-control input-md" type="number" max="90" min="0" ng-model="detail.commission_rate" />    
   </div>
 </div>
 
@@ -156,7 +156,7 @@
   <div class="form-group">
    <label class="col-md-2 control-label" for="singlebutton">Upload image</label>
     <div class="col-md-4  no-padding productimage">
-   <input type="file" nv-file-select="" uploader="uploader" name="image" />
+   <input type="file" nv-file-select="" uploader="uploader"  name="image" />
  </div>
   </div>
 </div>
@@ -195,7 +195,7 @@
  
 </div>
 <div class="form-group">
-   <label class="col-md-2 control-label" for="product_description">Add multi images</label>
+   <label class="col-md-2 control-label" for="image">Add multi images</label>
 <div class="col-md-8">  
    <div ng-show="uploaders.isHTML5" class="pull-left">
       <input type="file" nv-file-select="" uploader="uploaders" name="image" multiple />
@@ -305,11 +305,18 @@
 </fieldset>
 
 </form>
+<!--attributor start-->
+<div class="widgets" ng-if="detail.products_id">
 
-<div class="widgets">
+<div class="panel panel-default">
+  <div class="panel-heading">
+       Attributor List
+    </div>
+    <div class="panel-body">
+
  <div class="row">
     <div class="col-md-12">
-     <h5>Attributor List</h5>
+  
 <div class="form-group" ng-show="showattrlist">
 <table class="table" st-table="detail.attr.attrlist">
   <thead>
@@ -322,7 +329,7 @@
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody ng-repeat="(ikey,item) in detail.attr.attrlist" ng-init="parentIndex = $index">
+                        <tbody ng-repeat="(ikey,item) in detail.attr.attrlist track by $index" ng-init="parentIndex = $index">
 
                           <tr ng-repeat="sitem in item track by $index">
 
@@ -365,7 +372,10 @@
 
  </div>
 </div>
+ </div>
 </div>
+</div>
+<!--attributor end-->
 <script type="text/javascript" src="../jslib/ueditor/ueditor.config.js"></script>
 <script type="text/javascript" src="../jslib/ueditor/ueditor.all.js"></script>
 
