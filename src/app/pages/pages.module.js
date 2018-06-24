@@ -2,41 +2,60 @@
  * @author v.lugovsky
  * created on 16.12.2015
  */
-(function () {
+(function() {
   'use strict';
 
-  var bluradmin=angular.module('BlurAdmin.pages', [
-    'ui.router',
-    'ngStorage',
-    'BlurAdmin.pages.dashboard',
-   'BlurAdmin.pages.products',
-    'BlurAdmin.pages.ui',
-    'BlurAdmin.pages.components',
-    'BlurAdmin.pages.form',
-    'BlurAdmin.pages.tables',
-    'BlurAdmin.pages.charts',
-    'BlurAdmin.pages.maps',
-    'BlurAdmin.pages.profile',
+  var bluradmin = angular.module('BlurAdmin.pages', [
+      'ui.router',
+      'ngStorage',
+      'BlurAdmin.pages.dashboard',
+      'BlurAdmin.pages.products',
+      'BlurAdmin.pages.images',
+      'BlurAdmin.pages.ui',
+      'BlurAdmin.pages.components',
+      'BlurAdmin.pages.form',
+      'BlurAdmin.pages.tables',
+      'BlurAdmin.pages.charts',
+      'BlurAdmin.pages.maps',
+      'BlurAdmin.pages.profile',
 
-  ])
-      .config(routeConfig);
-  bluradmin.run(function ($rootScope,$http,$state,$stateParams,$localStorage,$window) {
-   var authtoken = $localStorage.auth;
+    ])
+    .config(routeConfig);
+  bluradmin.run(function($rootScope, $http, $state, $stateParams, $localStorage, $window) {
+    var authtoken = $localStorage.auth;
 
-   if(!authtoken){
-    $window.location.href = "/auth.html";
-   }
-   $http({
-    method: "GET",
-    url: "/env.json",
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    },
-  }).success(function(response) {
-   $rootScope.app = response;  
-  });
-  $http.defaults.headers.common.Authorization = $localStorage.auth;
-  $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';  
+    if (!authtoken) {
+      $window.location.href = "/auth.html";
+    }
+
+
+
+    $http({
+      method: "GET",
+      url: "/env.json",
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+    }).success(function(response) {
+      $rootScope.app = response;
+         $http({
+      method: "GET",
+      url: $rootScope.app.host+"/Auth/info",
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization':authtoken,
+      },
+    }).success(function(response) {
+    if(response.status){
+       $http.defaults.headers.common.Authorization = $localStorage.auth;
+    $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
+    }else{
+        $window.location.href = "/auth.html";
+    }
+    }); 
+    });
+
+   
   });
 
   /** @ngInject */
@@ -61,7 +80,7 @@
         title: '404 Page',
         fixedHref: '404.html',
         blank: true
-      },{
+      }, {
         title: 'Products',
         fixedHref: '/#/products',
         blank: true
@@ -79,7 +98,7 @@
           title: 'Menu Level 1.2.1',
           disabled: true
         }]
-      },{
+      }, {
         title: 'Products',
         stateRef: 'products',
         fixedHref: './reg.html',
