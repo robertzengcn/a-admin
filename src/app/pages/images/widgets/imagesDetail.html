@@ -1,0 +1,384 @@
+<form class="form-horizontal" ng-submit="processForm()">
+<fieldset>
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="singlebutton"></label>
+  <div class="col-md-8">
+    <button id="singlebutton" name="singlebutton" class="btn btn-primary" type="submit">Submit</button>
+  </div>
+  </div>  
+
+<!-- Text input-->
+<div class="form-group" ng-if="detail.products_id">
+  <label class="col-md-2 control-label" for="product_id">PRODUCT ID</label>  
+  <div class="col-md-8">
+  <input id="product_id" name="product_id" placeholder="PRODUCT ID" class="form-control input-md" required="" type="text" ng-model="detail.products_id"  readonly="readonly" />
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="product_name">PRODUCT NAME <span class="requirspan">*</span></label>  
+  <div class="col-md-8">
+  <input id="product_name" name="product_name" placeholder="PRODUCT NAME" class="form-control input-md" required="" type="text" ng-model="detail.products_name">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="product_price">PRODUCT PRICE<span class="requirspan">*</span></label>  
+  <div class="col-md-8">
+  <input id="product_price" name="product_price" placeholder="PRODUCT PRICE" class="form-control input-md" required="" type="text" ng-model="detail.products_price">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="product_categorie">PRODUCT CATEGORY</label>
+  <div class="col-md-8">
+    <select id="master_categories_id" name="master_categories_id" class="form-control" ng-options="value.categories_id as value.categories_name group by value.parent for (key,value) in cateloguelist" ng-model="detail.master_categories_id">
+    </select>
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="available_quantity">AVAILABLE QUANTITY<span class="requirspan">*</span></label>  
+  <div class="col-md-8">
+  <input id="available_quantity" name="available_quantity" placeholder="AVAILABLE QUANTITY" class="form-control input-md" required="" type="number" ng-model="detail.products_quantity" min=0 max="9999999" />
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="product_weight">PRODUCT WEIGHT<span class="requirspan">*</span></label>  
+  <div class="col-md-8">
+  <input id="product_weight" name="product_weight" placeholder="PRODUCT WEIGHT" class="form-control input-md" required="" type="text" ng-model="detail.products_weight">
+    
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-2 control-label" for="products_model">PRODUCT Model</label>  
+  <div class="col-md-8">
+  <input id="products_model" name="products_model" placeholder="PRODUCT Model, leave empty system will auto generate" class="form-control input-md"  type="text" ng-model="detail.products_model">
+    
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-2 control-label" for="origin_url">Origin Url</label>  
+  <div class="col-md-8">
+  <input id="origin_url" name="origin_url" placeholder="Origin Url" class="form-control input-md"  type="url" ng-model="detail.origin_url">    
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-2 control-label" for="commission_rate">Commission Rate</label>  
+  <div class="col-md-8">
+  <input id="commission_rate" name="commission_rate" placeholder="Commission Rate" class="form-control input-md" type="number" max="90" min="0" ng-model="detail.commission_rate" />    
+  </div>
+</div>
+
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="singlebutton">Product status</label>
+  <div class="col-md-8">
+<ba-switcher switcher-style="primary" switcher-value="detail.products_status"></ba-switcher>
+</div>
+  </div>
+<div class="form-group">
+   <label class="col-md-2 control-label" for="singlebutton">Product image<span class="requirspan">*</span></label>
+  <div class="col-md-4  no-padding productimage">
+        <img ng-src="{{detail.full_products_image}}" class="human-picture">
+  </div>
+</div>
+<div class="form-group" id="uimagelist">
+
+<table class="table" ng-show="uploader.showtable">
+                        <thead>
+                            <tr>
+                                <th width="50%">Name</th>
+                                <th ng-show="uploader.isHTML5">Size</th>
+                                <th ng-show="uploader.isHTML5">Progress</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in uploader.queue">
+                                <td>
+                                    <strong>{{ item.file.name }}</strong>
+                                    <!-- Image preview -->
+                                    <!--auto height-->
+                                    <!--<div ng-thumb="{ file: item.file, width: 100 }"></div>-->
+                                    <!--auto width-->
+                                    <div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div>
+                                    <!--fixed width and height -->
+                                    <!--<div ng-thumb="{ file: item.file, width: 100, height: 100 }"></div>-->
+                                </td>
+                                <td ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+                                <td ng-show="uploader.isHTML5">
+                                    <div class="progress" style="margin-bottom: 0;">
+                                        <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                                    <span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                                    <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+                                </td>
+                                <td nowrap>
+                                    <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                                        <span class="glyphicon glyphicon-upload"></span> Upload
+                                    </button>
+                                    <button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()" ng-disabled="!item.isUploading">
+                                        <span class="glyphicon glyphicon-ban-circle"></span> Cancel
+                                    </button>
+                                    <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+                                        <span class="glyphicon glyphicon-trash"></span> Remove
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+</div>
+ <div ng-show="uploader.isHTML5">
+  <div class="form-group">
+   <label class="col-md-2 control-label" for="singlebutton">Upload image</label>
+    <div class="col-md-4  no-padding productimage">
+   <input type="file" nv-file-select="" uploader="uploader"  name="image" />
+ </div>
+  </div>
+</div>
+<input type="hidden" value="" ng-model="detail.products_image" name="products_image" />
+
+ <!-- Textarea -->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="product_description">PRODUCT DESCRIPTION<span class="requirspan">*</span></label>
+  <div class="col-md-8">                     
+    <div class="ueditor" id="product_description" name="product_description" ng-model="detail.products_description" config="config" ready="ready"></div>
+  </div>
+</div>
+
+<!--multi image -->
+<div class="form-group" id="multiimage" ng-show="showimagelist">
+ <label class="col-md-2 control-label" for="product_description">PRODUCT Other image</label> 
+   <div class="col-md-4">  
+    <table data-toggle="table" id="product_image_table">
+    <thead>
+        <tr>
+           
+            <th>Image</th>
+            <th>order</th>
+            <th>Handle</th>
+        </tr>
+    </thead>
+    <tbody id="imagelist_body">
+
+      <tr ng-repeat="item in detail.image_list track by $index">
+        <td><img ng-src="{{item.fullurl}}" width="50px" height="50px" /><input type="hidden" ng-model="item.image"></td><td><input ng-model="item.num" name="image_list[]"></td><td><button ng-click="deleteimage($index)" type="button">delete</button></td>
+      </tr>
+       
+    </tbody>
+</table>
+ </div>
+ 
+</div>
+<div class="form-group">
+   <label class="col-md-2 control-label" for="image">Add multi images</label>
+<div class="col-md-8">  
+   <div ng-show="uploaders.isHTML5" class="pull-left">
+      <input type="file" nv-file-select="" uploader="uploaders" name="image" multiple />
+   </div>
+ </div>
+</div>
+<div class="form-group" id="uploadsimage" ng-show="uploaders.showtable">
+
+<table class="table">
+                        <thead>
+                            <tr>
+                                <th width="50%">Name</th>
+                                <th ng-show="uploaders.isHTML5">Size</th>
+                                <th ng-show="uploaders.isHTML5">Progress</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in uploaders.queue">
+                                <td>
+                                    <strong>{{ item.file.name }}</strong>
+                                    <!-- Image preview -->
+                                    <!--auto height-->
+                                    <!--<div ng-thumb="{ file: item.file, width: 100 }"></div>-->
+                                    <!--auto width-->
+                                    <div ng-show="uploaders.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div>
+                                    <!--fixed width and height -->
+                                    <!--<div ng-thumb="{ file: item.file, width: 100, height: 100 }"></div>-->
+                                </td>
+                                <td ng-show="uploaders.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+                                <td ng-show="uploaders.isHTML5">
+                                    <div class="progress" style="margin-bottom: 0;">
+                                        <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                                    <span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                                    <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+                                </td>
+                                <td nowrap>
+                                    <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                                        <span class="glyphicon glyphicon-upload"></span> Upload
+                                    </button>
+                                    <button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()" ng-disabled="!item.isUploading">
+                                        <span class="glyphicon glyphicon-ban-circle"></span> Cancel
+                                    </button>
+                                    <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+                                        <span class="glyphicon glyphicon-trash"></span> Remove
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+</div>
+
+ 
+  
+
+ </div>
+</div>
+
+<!--product meta start-->
+<div class="panel panel-default">
+  <div class="panel-heading">
+       SEO Information
+    </div>
+    <div class="panel-body">
+<div class="form-group">
+  <label class="col-md-2 control-label" for="product_weight">SEO Title</label>  
+  <div class="col-md-8">
+  <input id="metatags_title" name="metatags_title" placeholder="SEO Title" class="form-control input-md" required="" type="text" ng-model="detail.meta.metatags_title">
+    
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-md-2 control-label" for="product_weight">SEO Keyword</label>  
+  <div class="col-md-8">
+  <input id="metatags_keywords" name="metatags_keywords" placeholder="SEO Keyword" class="form-control input-md" required="" type="text" ng-model="detail.meta.metatags_keywords">
+    
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-md-2 control-label" for="metatags_description">SEO Description </label>  
+  <div class="col-md-8">
+  <input id="metatags_description" name="metatags_description" placeholder="SEO Description" class="form-control input-md" required="" type="text" ng-model="detail.meta.metatags_description">
+    
+  </div>
+</div>
+  </div>
+</div>
+<!--product meta end-->
+
+
+
+
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="singlebutton"></label>
+  <div class="col-md-8">
+    <button id="singlebutton" name="singlebutton" class="btn btn-primary" type="submit">Submit</button>
+  </div>
+  </div>
+
+</fieldset>
+
+</form>
+<!--attributor start-->
+<div class="widgets" ng-if="detail.products_id">
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+       Attributor List
+    </div>
+    <div class="panel-body">
+
+ <div class="row">
+    <div class="col-md-12">
+  
+<div class="form-group" ng-show="showattrlist">
+<table class="table" st-table="detail.attr.attrlist">
+  <thead>
+                            <tr>
+                              <th>Option Name</th>
+                                <th>Value Name</th>
+                                <th>Type</th>
+                                <th >Image</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody ng-repeat="(ikey,item) in detail.attr.attrlist track by $index" ng-init="parentIndex = $index">
+
+                          <tr ng-repeat="sitem in item track by $index">
+
+                            <td  ng-if="$first" rowspan={{item.length}}>{{detail.attr.optlist[ikey]}}</td>
+
+                            <td>{{sitem.products_options_values_name}}</td>
+                            <td>{{sitem.products_options_types_name}}</td>
+                            <td><img ng-if="sitem.fullimage!=null" src="{{sitem.fullimage}}" width="100px" height="100px" /></td>
+                            <td>
+                            
+                              <ba-switcher switcher-style="primary" switcher-value="sitem.attributes_status" switcherexe="changestatus(sitem.products_attributes_id,!sitem.attributes_status)"></ba-switcher>
+                              
+                            </td>
+                            <td>
+                          
+                              <button type="file" class="btn btn-info" ng-if="sitem.products_options_types_name=='Radio'" ngf-select="uplpoadattrimg($file, $invalidFiles,detail.products_id,sitem.products_attributes_id,ikey,$index)">UPload Image</button> <button class="btn btn-success" ng-click="deleattitem(detail.products_id,sitem.options_values_id,ikey,$index)">Delete</button>                             
+                            </td>
+                            <td  ng-if="$first" rowspan={{item.length}}><button class="btn btn-warning" data-toggle="modal" ng-click="opensetatti('app/pages/products/widgets/addattModal.html', 'sm',sitem,detail.products_id)">Add</button>
+                              <button class="btn btn-danger" ng-click="delattri(detail.products_id,ikey)">Delete</button>
+                            </td>
+
+                          </tr>
+
+                        </tbody>
+
+</table> 
+
+    </div>
+  </div>
+ </div>
+ <div class="marn60">
+   <label class="col-md-2 control-label" for="product_description">Add Attributor</label>
+<div class="col-md-8">  
+ <input type="text" id="attributor_name"  ng-model="newattr" />
+ <select ng-model="newattrtype"  ng-options="option.name for option in availableOptions track by option.id">
+
+
+
+</select><button ng-click="addattribtn(newattr,newattrtype)"> <span class="glyphicon glyphicon-trash"></span> Add</button>
+
+ </div>
+</div>
+ </div>
+</div>
+</div>
+<!--attributor end-->
+<script type="text/javascript" src="../jslib/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="../jslib/ueditor/ueditor.all.js"></script>
+
+<style type="text/css">
+.marn60{margin-bottom: 30px;}
+</style>

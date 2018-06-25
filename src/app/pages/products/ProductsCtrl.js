@@ -36,7 +36,7 @@
     	if(result.status){   	
 
       ctrl.displayed = result.data;
-      tableState.pagination.numberOfPages = result.recordsTotal;//set the number of pages so the pagination can update
+      tableState.pagination.numberOfPages = Math.ceil(result.recordsTotal/number);//set the number of pages so the pagination can update
       ctrl.isLoading = false;
      // console.log(ctrl.displayed);
       }

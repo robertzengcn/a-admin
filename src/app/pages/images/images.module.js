@@ -31,6 +31,17 @@
           sidebarMeta: {
             order: 100,
           },
+        }).state('images.detail', {
+          url: '/detail/:id',
+          templateUrl: 'app/pages/images/widgets/imagesDetail.html',
+          title: 'Detail',
+          controller: 'ImagesdetailCtrl', 
+          resolve: {
+            imagemodels:function($stateParams,ProductService){
+              console.log('1234');
+              return ImagesService.getimage($stateParams.id);
+            },
+          }       
         });
          $urlRouterProvider.when('/images','/images/list');
   }
