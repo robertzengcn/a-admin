@@ -37,8 +37,8 @@
           title: 'Detail',
           controller: 'ImagesdetailCtrl', 
           resolve: {
-            imagemodels:function($stateParams,ProductService){
-              console.log('1234');
+            imagemodels:function($stateParams,ImagesService){
+              
               return ImagesService.getimage($stateParams.id);
             },
           }       

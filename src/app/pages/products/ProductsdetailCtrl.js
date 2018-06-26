@@ -481,7 +481,7 @@
 		 */
 		$scope.changestatus = function(item, status) {
 
-			console.log(status);
+			
 			layer.load(1);
 			$http({
 				method: "POST",
@@ -520,10 +520,7 @@
 		 * @return    {[type]}    [description]
 		 */
 		$scope.processForm = function() {
-			layer.load(1);
-			console.log($scope.detail);
-			console.log($scope.detail.image_list);
-		console.log($.param($scope.detail));
+			layer.load(1);		
 			$http({
 					method: 'POST',
 					url: $scope.app.host + "/Products/save/",

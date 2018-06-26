@@ -12,6 +12,7 @@
     .factory('ImagesService', ["$q", "$http", "$localStorage", function($q, $http, $localStorage) {
       var apphost = $localStorage.host;
       var getimagelist = function(start, number, params) {
+
         var deferred = $q.defer();
         var promise = deferred.promise;
         var progress;
@@ -23,7 +24,7 @@
         }
 
         var sortkey = '';
-        console.log(params.sort);
+        
         if (params.sort.predicate) {
 
 
@@ -70,6 +71,7 @@
 
       };
       var getimage = function(id) {
+        console.log('222');
         var deferred = $q.defer();
         var promise = deferred.promise;
         var data = $.param({
