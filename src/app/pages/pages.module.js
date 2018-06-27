@@ -46,15 +46,13 @@
         'Authorization':authtoken,
       },
     }).success(function(response) {
-    if(response.status){
-       $http.defaults.headers.common.Authorization = $localStorage.auth;
-    $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
-    }else{
+    if(!response.status){          
         $window.location.href = "/auth.html";
     }
     }); 
     });
-
+    $http.defaults.headers.common.Authorization = $localStorage.auth;
+    $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
    
   });
 

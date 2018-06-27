@@ -20,15 +20,18 @@
 			autoUpload: true
 		});
 		uploader.showtable = false;
-		uploader.filters.push({//图片上传过滤器
+		uploader.filters.push({ //图片上传过滤器
 			name: 'imageFilter',
 			fn: function(item /*{File|FileLikeObject}*/ , options) {
 				var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
 				return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
 			}
 		});
-		
 
+		uploader.onAfterAddingFile = function(fileItem) {
+			//console.info('onAfterAddingFile', fileItem);
+			uploader.showtable = true;
+		};
 		uploader.onCompleteItem = function(fileItem, response, status, headers) {
 			console.info('onCompleteItem', fileItem, response, status, headers);
 			console.log(status);
@@ -58,22 +61,22 @@
 		 * @return    {[type]}    [description]
 		 */
 		$scope.processForm = function() {
-			layer.load(1);		
+			layer.load(1);
 			$http({
 					method: 'POST',
 					url: $scope.app.host + "/images/save/",
 					data: $.param($scope.detail), // pass in data as strings
-					
+
 					headers: {
 						'Content-Type': 'application/x-www-form-urlencoded'
 					} // set the headers so angular passing info as form data (not request payload)
 				})
 				.success(function(data) {
 					layer.closeAll('loading');
-					
+
 
 					if (data.status) {
-						$scope.detail.id=data.data.id;
+						$scope.detail.id = data.data.id;
 						// if not successful, bind errors to error variables
 						layer.alert('Update success');
 					} else {
