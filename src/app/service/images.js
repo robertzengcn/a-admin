@@ -24,7 +24,7 @@
         }
 
         var sortkey = '';
-        
+
         if (params.sort.predicate) {
 
 
@@ -96,11 +96,17 @@
         return promise;
 
       };
+      var getimagesmodel = function() {
+        var model = {};
+        model.data = {};
+        return model;
+      };
 
 
       return {
         getimagelist: getimagelist,
-        getimage:getimage,
+        getimage: getimage,
+       getimagesmodel: getimagesmodel,
       };
 
     }]);

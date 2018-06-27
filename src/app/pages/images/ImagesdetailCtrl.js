@@ -76,7 +76,7 @@
 
 
 					if (data.status) {
-						$scope.detail.id = data.data.id;
+						$scope.detail.id = data.data;
 						// if not successful, bind errors to error variables
 						layer.alert('Update success');
 					} else {

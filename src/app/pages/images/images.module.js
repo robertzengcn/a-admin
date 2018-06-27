@@ -42,6 +42,19 @@
               return ImagesService.getimage($stateParams.id);
             },
           }       
+        }).state('images.create',{
+          url: '/create/', 
+          templateUrl: 'app/pages/images/widgets/imagesDetail.html',
+          title: 'Create images',
+            sidebarMeta: {
+            order: 110,
+          },
+          controller: 'ImagesdetailCtrl',
+          resolve: {
+            imagemodels:function($stateParams,ImagesService){
+             return ImagesService.getimagesmodel();
+            }
+          } 
         });
          $urlRouterProvider.when('/images','/images/list');
   }

@@ -10,6 +10,15 @@
   </div>  
 
   <!-- Text input-->
+<div class="form-group" ng-if="detail.id">
+  <label class="col-md-2 control-label" for="product_id">Image ID</label>  
+  <div class="col-md-8">
+  <input id="id" name="id" placeholder="Image ID" class="form-control input-md" required="" type="text" ng-model="detail.id"  readonly="readonly" />
+    
+  </div>
+</div>
+
+  <!-- Text input-->
 <div class="form-group">
   <label class="col-md-2 control-label" for="name">Image Name <span class="requirspan">*</span></label>  
   <div class="col-md-8">
@@ -36,6 +45,14 @@
   <label class="col-md-2 control-label" for="alt">Alt <span class="requirspan">*</span></label>  
   <div class="col-md-8">
   <input id="alt" name="alt" placeholder="Alt" class="form-control input-md"  type="text" ng-model="detail.alt" />    
+  </div>
+</div>
+
+  <!-- Text input-->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="alt">Flag <span class="requirspan">*</span></label>  
+  <div class="col-md-8">
+  <input id="flag" name="flag" placeholder="Flag" class="form-control input-md"  type="text" ng-model="detail.flag" />    
   </div>
 </div>
 
