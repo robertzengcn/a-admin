@@ -21,7 +21,7 @@
           controller: 'ImagesCtrl',
           title: 'Images Manager',
           sidebarMeta: {
-            icon: 'ion-android-home',
+            icon: 'fa fa fa-image',
             order: 1,
           },
         }).state('images.list', {

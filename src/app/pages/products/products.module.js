@@ -22,7 +22,7 @@
           controller: 'ProductsCtrl',
           title: 'Products',
           sidebarMeta: {
-            icon: 'ion-android-home',
+            icon: 'fa fa fa-anchor',
             order: 1,
           },
         }).state('products.list', {
