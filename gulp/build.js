@@ -77,6 +77,16 @@ gulp.task('fonts', function () {
     .pipe(gulp.dest(path.join(conf.paths.dist, '/fonts/')));
 });
 
+gulp.task('authjs', function () {
+  return gulp.src(path.join(conf.paths.tmp, 'serve', '/alone/*js'))
+    .pipe(gulp.dest(path.join(conf.paths.dist, '/alone')));
+});
+
+gulp.task('copyjslib', function () {
+  return gulp.src([path.join(conf.paths.tmp, 'serve','/jslib/*'),path.join(conf.paths.tmp, 'serve','/jslib/*/*.js')])
+    .pipe(gulp.dest(path.join(conf.paths.dist, '/jslib')));
+});
+
 gulp.task('other', ['copyVendorImages'], function () {
   var fileFilter = $.filter(function (file) {
     return file.stat.isFile();
@@ -95,4 +105,4 @@ gulp.task('clean', function () {
   return $.del([path.join(conf.paths.dist, '/'), path.join(conf.paths.tmp, '/')]);
 });
 
-gulp.task('build', ['html', 'fonts', 'other']);
+gulp.task('build', ['html', 'fonts', 'other','authjs','copyjslib']);

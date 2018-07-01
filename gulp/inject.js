@@ -15,7 +15,7 @@ gulp.task('inject-reload', ['inject'], function () {
   browserSync.reload();
 });
 
-gulp.task('inject', ['scripts', 'styles', 'injectAuth', 'inject404', 'copyVendorImages','move_env'], function () {
+gulp.task('inject', ['scripts', 'styles', 'injectAuth', 'inject404', 'copyVendorImages','move_env','injectjsAlone','injectjslib'], function () {
   var injectStyles = gulp.src([
     path.join(conf.paths.tmp, '/serve/app/main.css'),
     path.join('!' + conf.paths.tmp, '/serve/app/vendor.css')
@@ -71,8 +71,8 @@ gulp.task('inject404', ['styles404'], function () {
 //auth页面注入js
 gulp.task('injectAuthjs', [], function () {
 return injectjsAlone({
-    js: [path.join('!' + conf.paths.tmp, '/serve/app/vendor.js'), path.join(conf.paths.tmp, '/serve/app/auth.css')],
-    paths: [path.join(conf.paths.src, '/auth.html'), path.join(conf.paths.src, '/reg.html')]
+   // js: [path.join(conf.paths.src, '/alone/alone.js'), path.join(conf.paths.src, '/alone/auth.js')],
+    paths: [path.join(conf.paths.src, '/alone/alone.js'), path.join(conf.paths.src, '/alone/auth.js')]
   });
 });
 
@@ -98,19 +98,23 @@ var injectAlone = function (options) {
     .pipe(gulp.dest(path.join(conf.paths.tmp, '/serve')));
 };
 
-var injectjsAlone = function (options) {
-  var injectScripts = gulp.src(
-    options.js, {read: false});
 
 
+gulp.task('injectjsAlone', [], function () {
+return gulp.src(path.join(conf.paths.src, '/alone/*'))
+ .pipe(gulp.dest(path.join(conf.paths.tmp, '/serve/alone')));
+});
 
-  var injectOptions = {
-    ignorePath: [conf.paths.src, path.join(conf.paths.tmp, '/serve')],
-    addRootSlash: false
-  };
+gulp.task('injectjslib', [], function () {
+ 
+return gulp.src([path.join(conf.paths.src, '/jslib/*'), path.join(conf.paths.src, '/jslib/*/*')])
+ .pipe(gulp.dest(path.join(conf.paths.tmp, '/serve/jslib')));
+});
 
-  return gulp.src(options.paths)
-    .pipe($.inject(injectScripts, injectOptions))
-    .pipe(wiredep(_.extend({}, conf.wiredep)))
-    .pipe(gulp.dest(path.join(conf.paths.tmp, '/serve')));
-};
+gulp.task('move_alone', function () {
+  return gulp
+    .src([
+      path.join(conf.paths.src, '/alone/*js')
+    ])
+    .pipe(gulp.dest(path.join(conf.paths.tmp, 'serve', '/alone/*js')));
+});

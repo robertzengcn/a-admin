@@ -11,6 +11,7 @@ var $ = require('gulp-load-plugins')({
 var _ = require('lodash');
 
 gulp.task('dev-fonts', function () {
+  
   return gulp.src($.mainBowerFiles())
       .pipe($.filter('**/*.{eot,svg,ttf,woff,woff2}'))
       .pipe($.flatten())
@@ -40,10 +41,13 @@ gulp.task('dev-css-replace', ['dev-copy-assets'], function() {
 });
 
 gulp.task('dev-js-replace', ['dev-copy-assets'], function() {
+
   return gulp.src(path.join(conf.paths.devDist, '.html'))
       .pipe($.replace(/<script src="\.\.\/bower_components\/.*\/(.*)"\s*?>/g, '<script src="lib/$1">'))
       .pipe(gulp.dest(conf.paths.devDist));
 });
+
+
 
 gulp.task('dev-copy-assets', ['inject', 'dev-copy-lib', 'dev-fonts'], function () {
   return gulp
