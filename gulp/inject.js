@@ -107,7 +107,7 @@ return gulp.src(path.join(conf.paths.src, '/alone/*'))
 
 gulp.task('injectjslib', [], function () {
  
-return gulp.src([path.join(conf.paths.src, '/jslib/*'), path.join(conf.paths.src, '/jslib/*/*')])
+return gulp.src([path.join(conf.paths.src, '/jslib/*'), path.join(conf.paths.src, '/jslib/**/*')])
  .pipe(gulp.dest(path.join(conf.paths.tmp, '/serve/jslib')));
 });
 

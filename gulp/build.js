@@ -82,7 +82,7 @@ gulp.task('authjs', function () {
     .pipe(gulp.dest(path.join(conf.paths.dist, '/alone')));
 });
 
-gulp.task('copyjslib',['html'], function () {
+gulp.task('copyjslib',['html','other'], function () {
   return gulp.src([path.join(conf.paths.tmp, 'serve','/jslib/**'),path.join(conf.paths.tmp, 'serve','/jslib/**/*')])
     .pipe(gulp.dest(path.join(conf.paths.dist, '/jslib')));
 });
