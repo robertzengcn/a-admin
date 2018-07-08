@@ -18,7 +18,7 @@
       'BlurAdmin.pages.charts',
       'BlurAdmin.pages.maps',
       'BlurAdmin.pages.profile',
-
+      
     ])
     .config(routeConfig);
   bluradmin.run(function($rootScope, $http, $state, $stateParams, $localStorage, $window) {
@@ -102,6 +102,8 @@
         fixedHref: './reg.html',
       }]
     });
-  }
+  };
+  
+
 
 })();
