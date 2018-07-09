@@ -125,7 +125,7 @@
             deferred.reject(error);
           });
         return promise;
-      }
+      };
 
 
       return {

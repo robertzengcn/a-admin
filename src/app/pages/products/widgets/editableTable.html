@@ -21,7 +21,7 @@
     <td>{{row.products_quantity}}</td>
     <td><div class="buttons">
         <a class="btn btn-primary editable-table-button btn-xs" ui-sref="products.detail({id:row.products_id})">Edit</a>
-        <button class="btn btn-danger editable-table-button btn-xs" ng-click="removeUser($index)">Delete</button>
+        <button class="btn btn-danger editable-table-button btn-xs" ng-click="mc.removeitem(row)">Delete</button>
       </div></td>
   </tr>
     
