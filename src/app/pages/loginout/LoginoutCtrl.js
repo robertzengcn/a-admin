@@ -8,8 +8,10 @@
 	angular.module('BlurAdmin.pages.products')
 		.controller('LoginoutCtrl', LoginoutCtrl);
 	/** @ngInject */
-	function LoginoutCtrl($scope, $filter, $localStorage) {
-		
+	function LoginoutCtrl($scope,$localStorage,$location, $window) {
+		console.log('loginout');
+		 $window.localStorage.clear();
+		 $window.location.href = "/auth.html";
 	}
 
 })();

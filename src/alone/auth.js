@@ -38,7 +38,7 @@ app.controller('LoginController',function($scope,$state,$http,$localStorage,md5,
     //$state.go('app.dashboard');
       $window.location.href = "/index.html"; 
   }else{
-    $scope.authError=response.data.msg;
+    $scope.authError=response.msg;
   }
  }); 
     };

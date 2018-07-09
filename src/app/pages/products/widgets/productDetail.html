@@ -52,7 +52,7 @@
 <div class="form-group">
   <label class="col-md-2 control-label" for="available_quantity">AVAILABLE QUANTITY<span class="requirspan">*</span></label>  
   <div class="col-md-8">
-  <input id="available_quantity" name="available_quantity" placeholder="AVAILABLE QUANTITY" class="form-control input-md" required="" type="number" ng-model="detail.products_quantity" min=0 max="9999999" />
+  <input id="available_quantity" name="available_quantity" placeholder="AVAILABLE QUANTITY" class="form-control input-md" required="" type="number" string-to-number ng-model="detail.products_quantity" min=0 max="9999999" />
     
   </div>
 </div>
@@ -84,7 +84,7 @@
 <div class="form-group">
   <label class="col-md-2 control-label" for="commission_rate">Commission Rate</label>  
   <div class="col-md-8">
-  <input id="commission_rate" name="commission_rate" placeholder="Commission Rate" class="form-control input-md" type="number" max="90" min="0" ng-model="detail.commission_rate" />    
+  <input id="commission_rate" name="commission_rate" placeholder="Commission Rate" class="form-control input-md" type="number" string-to-number max="90" min="0" ng-model="detail.commission_rate" />    
   </div>
 </div>
 

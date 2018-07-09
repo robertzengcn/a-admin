@@ -13,8 +13,7 @@
   function routeConfig($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('loginout', {
-          url: '/loginout',
-          abstract: true,
+          url: '/loginout',        
           controller: 'LoginoutCtrl',  
         });
   }

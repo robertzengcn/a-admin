@@ -18,7 +18,7 @@
       'BlurAdmin.pages.charts',
       'BlurAdmin.pages.maps',
       'BlurAdmin.pages.profile',
-      
+      'BlurAdmin.pages.loginout',
     ])
     .config(routeConfig);
   bluradmin.run(function($rootScope, $http, $state, $stateParams, $localStorage, $window) {
@@ -27,8 +27,6 @@
     if (!authtoken) {
       $window.location.href = "/auth.html";
     }
-
-
 
     $http({
       method: "GET",

@@ -78,7 +78,7 @@ gulp.task('fonts', function () {
 });
 
 gulp.task('authjs', function () {
-  return gulp.src(path.join(conf.paths.tmp, 'serve', '/alone/*js'))
+  return gulp.src(path.join(conf.paths.tmp, 'serve', '/alone/**'))
     .pipe(gulp.dest(path.join(conf.paths.dist, '/alone')));
 });
 
