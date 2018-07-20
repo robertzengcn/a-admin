@@ -146,12 +146,51 @@
           });
         return promise;
       };
+      /**
+       * 批量删除产品
+       * @Author    Robert      Zeng
+       * @DateTime  2018-07-20
+       * @copyright [copyright]
+       * @license   [license]
+       * @version   [version]
+       * @param     {[type]}    arr  [description]
+       * @return    {[type]}         [description]
+       */
+      var batchdelete=function(arr){
+        var ids=JSON.stringify(arr);
+        if(!ids){
+          return;
+        }
+        var deferred = $q.defer();
+        var promise = deferred.promise;
+        var datas = $.param({
+          ids: ids
+        });
+      
+        $http.delete(apphost + "/products/deletes/",datas)
+          .success(function(data) {
+            // var result = [];
+            // for(var i = 0; i < data.length; i++){
+            //     result.push(data[i].user);
+            //     progress = (i+1)/data.length * 100;
+            //     deferred.notify(progress);
+            // }
+            deferred.resolve(
+              data
+            );
+          })
+          .error(function(error) {
+            deferred.reject(error);
+          });
+        return promise;
+      }
       return {
         getproductlist: getproductlist,
         getproduct: getproduct,
         getcateloguelist: getcateloguelist,
         getproductmodel: getproductmodel,
-        deleteproduct:deleteproduct
+        deleteproduct:deleteproduct,
+        batchdelete:batchdelete,
       };
 
     }]);

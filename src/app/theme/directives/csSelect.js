@@ -22,8 +22,10 @@
             scope.$watch('row.isSelected', function (newValue, oldValue) {
                 if (newValue === true) {
                     element.parent().addClass('st-selected');
+                    element.find('input').attr('checked', true);
                 } else {
                     element.parent().removeClass('st-selected');
+                     element.find('input').attr('checked', false);
                 }
             });
         }

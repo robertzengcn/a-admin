@@ -11,7 +11,7 @@
   <table class="table table-hover" st-pipe="mc.callServer" st-table="mc.displayed">
     <thead>
     <tr class="sortable">
-      <th><input type="checkbox" ng-click="mc.toggleAll()"> Choose All</th>
+      <th row-select-all="mc.displayed"  selected="mc.selected" ng-click="mc.selectAll(mc.displayed)"></th>
       <th class="table-id">#</th>
       <th st-sort="products_name">Name</th>
       <th>Image</th>
