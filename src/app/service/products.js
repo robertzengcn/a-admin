@@ -157,17 +157,18 @@
        * @return    {[type]}         [description]
        */
       var batchdelete=function(arr){
+        console.log(arr);
         var ids=JSON.stringify(arr);
         if(!ids){
           return;
         }
         var deferred = $q.defer();
         var promise = deferred.promise;
-        var datas = $.param({
-          ids: ids
-        });
-      
-        $http.delete(apphost + "/products/deletes/",datas)
+        // var datas = $.param({
+        //   ids: ids
+        // });
+        console.log(ids);
+        $http.delete(apphost + "/products/deletes/",{params: {'ids':ids}})
           .success(function(data) {
             // var result = [];
             // for(var i = 0; i < data.length; i++){
