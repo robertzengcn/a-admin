@@ -11,7 +11,8 @@
   angular.module('BlurAdmin.service')
     .factory('ProductService', ["$q", "$http", "$localStorage", function($q, $http, $localStorage) {
       var apphost = $localStorage.host;
-      var getproductlist = function(start, number, params) {
+      var getproductlist = function(start, number, params,catalogue_id) {
+      	catalogue_id=catalogue_id||0;
         var deferred = $q.defer();
         var promise = deferred.promise;
         var progress;
@@ -42,7 +43,8 @@
           length: number,
           search: serarkey,
           sort: sortkey,
-          sortway: sortway
+          sortway: sortway,
+          catalogue:catalogue_id
         });
 
 
@@ -184,7 +186,7 @@
             deferred.reject(error);
           });
         return promise;
-      }
+      };
       return {
         getproductlist: getproductlist,
         getproduct: getproduct,

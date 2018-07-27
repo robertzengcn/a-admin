@@ -7,9 +7,10 @@
 
   angular.module('BlurAdmin.pages.products')
     .controller('ProductsCtrl', ProductsCtrl);
+    //ProductsCtrl.$inject = ['$scope', '$filter', 'editableOptions', 'editableThemes','ProductService','Cateloguelistmodel'];
 
   /** @ngInject */
-  function ProductsCtrl($scope, $filter, editableOptions, editableThemes, ProductService) {
+  function ProductsCtrl($scope, $filter, editableOptions, editableThemes,ProductService) {
     // ProductService.getproductlist().then(function(result){
     // //$scope.productlist=result;
     // },function(error){
@@ -17,10 +18,12 @@
     // }).then(function(result){
 
     // });
-
+    var mc=this;
     var ctrl = this;
-
+    
     this.displayed = [];
+
+    $scope.resultnum=0;
 
     this.callServer = function callServer(tableState) {
 
@@ -30,8 +33,8 @@
 
       var start = pagination.start || 0; // This is NOT the page number, but the index of item in the list that you want to use to display the table.
       var number = pagination.number || 10; // Number of entries showed per page.
-
-      ProductService.getproductlist(start, number, tableState).then(function(result) {
+      var catelogue=$scope.master_categories_id;
+      ProductService.getproductlist(start, number, tableState,catelogue).then(function(result) {
 
         if (result.status) {
           // for (var key in result.data) {
@@ -42,6 +45,7 @@
 
           tableState.pagination.numberOfPages = Math.ceil(result.recordsTotal / number); //set the number of pages so the pagination can update
           ctrl.isLoading = false;
+          $scope.resultnum=result.recordsFiltered;
           // console.log(ctrl.displayed);
         }
       });
@@ -169,7 +173,7 @@
 
       else ctrl.selected.splice(found, 1);
 
-    }
+    };
     /**
      * reflash table
      * @Author    Robert      Zeng
@@ -183,7 +187,36 @@
 
     this.refreshGrid = function() {
       $scope.$broadcast('refreshProducts');
-    }
+    };
+    /**
+     * 获取目录
+     * @Author    Robert      Zeng
+     * @DateTime  2018-07-26
+     * @copyright [copyright]
+     * @license   [license]
+     * @version   [version]
+     * @return    {[type]}    [description]
+     */
+    this.getcatelist=function(){
+      ProductService.getcateloguelist().then(function(result) {
+         
+          if (result.status) {
+             $scope.cateloguelist=result.data;
+             console.log($scope.cateloguelist);
+             // if(!$scope.master_categories_id){//赋予默认
+             //  $scope.master_categories_id=$scope.cateloguelist[0].categories_id;
+             // }
+            //ctrl.displayed.splice(indexs, 1);
+          } else {
+            layer.alert(result.msg);
+          }
+        });
+      
+    };
+    
+    this.getcatelist();
+
+
 
   }
 

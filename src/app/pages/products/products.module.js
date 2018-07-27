@@ -19,7 +19,7 @@
           url: '/products',
           template : '<ui-view  autoscroll="true" autoscroll-body-top></ui-view>',
           abstract: true,
-          controller: 'ProductsCtrl',
+          //controller: 'ProductsCtrl',
           title: 'Products',
           sidebarMeta: {
             icon: 'fa fa fa-anchor',
@@ -32,6 +32,8 @@
           sidebarMeta: {
             order: 100,
           },
+         // controller: 'ProductsCtrl'
+       
         }).state('products.detail', {
           url: '/detail/:id',
           templateUrl: 'app/pages/products/widgets/productDetail.html',
