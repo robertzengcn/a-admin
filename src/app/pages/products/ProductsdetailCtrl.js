@@ -536,6 +536,7 @@
 
 					if (data.status) {
 						$scope.detail.products_id=data.data.products_id;
+						$scope.detail.products_description=data.data.products_description;
 						// if not successful, bind errors to error variables
 						layer.alert('Update success');
 					} else {
