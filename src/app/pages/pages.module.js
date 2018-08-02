@@ -19,6 +19,7 @@
       'BlurAdmin.pages.maps',
       'BlurAdmin.pages.profile',
       'BlurAdmin.pages.loginout',
+      'BlurAdmin.pages.workers',
     ])
     .config(routeConfig);
   bluradmin.run(function($rootScope, $http, $state, $stateParams, $localStorage, $window) {

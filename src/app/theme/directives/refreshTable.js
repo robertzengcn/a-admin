@@ -12,6 +12,15 @@
 				scope.$on("refreshProducts", function() {
 					table.pipe(table.tableState());
 				});
+				
+				scope.$on("refreshWorkers", function() {
+					table.pipe(table.tableState());
+				});
+				
+				scope.$on("refreshWorkersGroup", function() {
+					table.pipe(table.tableState());
+				});
+				
 			}
 		}
 	};
