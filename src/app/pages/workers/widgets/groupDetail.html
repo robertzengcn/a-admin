@@ -1,0 +1,55 @@
+<form class="form-horizontal" ng-submit="processForm()">
+<fieldset>
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="singlebutton"></label>
+  <div class="col-md-8">
+    <button id="singlebutton" name="singlebutton" class="btn btn-primary" type="submit">Submit</button>
+  </div>
+  </div>  
+
+<!-- Text input-->
+<div class="form-group" ng-if="detail.id">
+  <label class="col-md-2 control-label" for="id">GROUP ID</label>  
+  <div class="col-md-8">
+  <input id="id" name="id" placeholder="GROUP ID" class="form-control input-md" required="" type="text" ng-model="detail.id"  readonly="readonly" />
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="name">GROUP NAME <span class="requirspan">*</span></label>  
+  <div class="col-md-8">
+  <input id="name" name="name" placeholder="GROUP NAME" class="form-control input-md" required="" type="text" ng-model="detail.name">
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-2 control-label">MENUS<span class="requirspan">*</span></label>  
+  <div class="col-md-8">
+   <label class="checkbox checkbox-inline" ng-repeat="k in allmenus">
+    <input type="checkbox" ng-model="k.id" ng-true-value="{{k.id}}" ng-false-value="0" ng-checked="isSelected(k.id)" ng-click="updateSelection($event,k.id)">{{k.name}}
+    </label>
+  </div>
+</div>
+
+ </div>
+</div>
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="singlebutton"></label>
+  <div class="col-md-8">
+    <button id="singlebutton" name="singlebutton" class="btn btn-primary" type="submit">Submit</button>
+  </div>
+  </div>
+
+</fieldset>
+
+</form>
+
+<style type="text/css">
+.marn60{margin-bottom: 30px;}
+</style>

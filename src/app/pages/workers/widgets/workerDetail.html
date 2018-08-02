@@ -1,0 +1,99 @@
+<form class="form-horizontal" ng-submit="processForm()">
+<fieldset>
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="singlebutton"></label>
+  <div class="col-md-8">
+    <button id="singlebutton" name="singlebutton" class="btn btn-primary" type="submit">Submit</button>
+  </div>
+  </div>  
+
+<!-- Text input-->
+<div class="form-group" ng-if="detail.id">
+  <label class="col-md-2 control-label" for="id">WORKER ID</label>  
+  <div class="col-md-8">
+  <input id="id" name="id" placeholder="WORKER ID" class="form-control input-md" required="" type="text" ng-model="detail.id"  readonly="readonly" />
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="name">WORKER NAME <span class="requirspan">*</span></label>  
+  <div class="col-md-8">
+  <input id="name" name="name" placeholder="WORKER NAME" class="form-control input-md" required="" type="text" ng-model="detail.name">
+  </div>
+</div>
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="type">WORKER TYPE</label>
+  <div class="col-md-8">
+    <select id="type" name="type" class="form-control" ng-model="detail.type">
+    <option value="">--管理员类型--</option>
+    <option ng-repeat="(key,value) in workertypelist" value="{{key}}" ng-selected="key==detail.type">{{value}}</option>
+    </select>
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="password">WORKER PASSWORD</label>  
+  <div class="col-md-8">
+  <input id="password" name="password" placeholder="WORKER PASSWORD" class="form-control input-md"  type="password" ng-model="detail.password">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="confirm_password">CONFIRM PASSWORD</label>  
+  <div class="col-md-8">
+  <input id=""confirm_password"" name=""confirm_password"" placeholder="CONFIRM PASSWORD" class="form-control input-md"  type="password" ng-model="confirmpassword">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="group">GROUP<span class="requirspan">*</span></label>  
+  <div class="col-md-8">
+    <select id="group" name="group" class="form-control" ng-change="drawMenu();" ng-model="detail.group">
+           <option value="">--所属组--</option>
+           <option ng-repeat="x in allgroups" value="{{x.id}}" ng-selected="x.id==detail.group">{{x.name}}</option>
+    </select>
+  </div>
+  <div class="col-md-2">
+  <button id="createGroup" name="createGroup" ui-sref="workers.creategroup()" class="btn btn-small btn-link" type="button">Create Group</button>
+  </div>
+</div>
+
+<!-- Checkbox input -->
+<div class="form-group">
+  <label class="col-md-2 control-label">MENUS<span class="requirspan">*</span></label>  
+  <div class="col-md-8">
+   <label class="checkbox checkbox-inline" ng-repeat="k in allmenus">
+    <input type="checkbox" ng-model="k.id" ng-true-value="{{k.id}}" ng-false-value="0" ng-checked="isSelected(k.id)" ng-click="updateSelection($event,k.id)">{{k.name}}
+    </label>
+  </div>
+</div>
+
+ </div>
+</div>
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="singlebutton"></label>
+  <div class="col-md-8">
+    <button id="singlebutton" name="singlebutton" class="btn btn-primary" type="submit">Submit</button>
+  </div>
+  </div>
+
+</fieldset>
+
+</form>
+
+<style type="text/css">
+.marn60{margin-bottom: 30px;}
+</style>
