@@ -61,7 +61,7 @@
   <div class="col-md-8">
     <select id="group" name="group" class="form-control" ng-change="drawMenu();" ng-model="detail.group">
            <option value="">--所属组--</option>
-           <option ng-repeat="x in allgroups" value="{{x.id}}" ng-selected="x.id==detail.group">{{x.name}}</option>
+           <option ng-repeat="x in allgroups" value="{{x.id}}" ng-selected="x.id==detail.group">{{x.group_name}}</option>
     </select>
   </div>
   <div class="col-md-2">

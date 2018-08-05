@@ -24,7 +24,7 @@
 <tr ng-repeat="row in mc.displayed">
   <td cs-select="row" ng-click="mc.select(row.id)"></td>
     <td>{{$index+1}}</td>
-    <td>{{row.name}}</td>
+    <td>{{row.group_name}}</td>
     <td><div class="buttons">
         <a class="btn btn-primary editable-table-button btn-xs" ui-sref="workers.groupdetail({id:row.id})">Edit</a>
         <button class="btn btn-danger editable-table-button btn-xs" ng-click="mc.removeitem(row)">Delete</button>
