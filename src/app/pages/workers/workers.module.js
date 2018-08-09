@@ -45,6 +45,9 @@
               },
               allmenus:function(WorkerService){
                   return WorkerService.getallmenus();
+              },
+              allpersm:function(WorkerService){
+              	return WorkerService.getallpermisionlist();
               }
             }       
           }).state('workers.create',{

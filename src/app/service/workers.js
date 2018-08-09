@@ -27,7 +27,7 @@
         }
 
         var sortkey = '';
-        console.log(params.sort);
+        //console.log(params.sort);
         if (params.sort.predicate) {
 
 
@@ -307,7 +307,7 @@
             deferred.reject(error);
           });
         return promise;
-      }
+      };
       
       /**
        * 重置密码
@@ -367,6 +367,24 @@
               });
             return promise;
         };
+        /*
+         *获取所有权限列表
+         */
+        var getallpermisionlist=function(){
+        	var deferred = $q.defer();
+            var promise = deferred.promise;
+             $http.post(apphost + "/workers/getallpermission")
+              .success(function(data) {
+                deferred.resolve(
+                  data
+                );
+              })
+              .error(function(error) {
+                deferred.reject(error);
+              });
+            return promise;
+
+        };
         
       return {
         getworkerlist: getworkerlist,
@@ -382,6 +400,7 @@
         getgrouplist: getgrouplist,
         deletegroup: deletegroup,
         getworkergroup: getworkergroup,
+        getallpermisionlist:getallpermisionlist,
       };
 
     }]);
