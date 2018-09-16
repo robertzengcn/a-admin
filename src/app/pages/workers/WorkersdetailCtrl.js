@@ -21,6 +21,7 @@
 	    var updateSelected = function(action, id) {
 	      if(action == 'add' & $scope.selected.indexOf(id) == -1) $scope.selected.push(id);
 	      if(action == 'remove' && $scope.selected.indexOf(id) != -1) $scope.selected.splice($scope.selected.indexOf(id), 1);
+	    console.log(id);
 	    };
 
 	    var updatepiSelected = function(action, id) {
@@ -107,8 +108,10 @@
 			
 			$scope.selected.sort();
 			$scope.detail.new_menus = $scope.selected;
+			if($scope.detail.password){
+			$scope.detail.password = md5.createHash($scope.detail.password);	
+			}
 			
-			$scope.detail.password = md5.createHash($scope.detail.password);
 			layer.load(1);	
 			$http({
 					method: 'POST',
