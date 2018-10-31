@@ -8,7 +8,7 @@
 		.controller('WorkersgroupdetailCtrl', WorkersgroupdetailCtrl);
 	/** @ngInject */
 	function WorkersgroupdetailCtrl($scope, $filter, $localStorage, editableOptions, editableThemes, WorkerService, groupmodels, allmenus, $http, $timeout, $uibModal, baProgressModal, $window) {
-		console.log(groupmodels.data);
+		//console.log(groupmodels.data);
 		$scope.detail = groupmodels.data;
 		$scope.allmenus = allmenus.data;
 		
@@ -62,8 +62,11 @@
 				        layer.confirm('Update success!', function(index) {
 				            $scope.detail.id=data.data.id;
 							//go to groups
-							$window.location.href = 'index.html#/workers/grouplist';
+							//$window.location.href = 'index.html#/workers/grouplist';
+				        
 				          layer.close(index);
+				          history.back();
+							$scope.$apply();
 				        });
 					      
 					} else {

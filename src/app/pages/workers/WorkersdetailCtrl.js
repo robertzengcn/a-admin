@@ -7,7 +7,7 @@
 	angular.module('BlurAdmin.pages.workers')
 		.controller('WorkersdetailCtrl', WorkersdetailCtrl);
 	/** @ngInject */
-	function WorkersdetailCtrl($scope, $filter, $localStorage, editableOptions, editableThemes, WorkerService, workermodels, workertypelist, allgroups, allmenus, allpersm,$http, $timeout, $uibModal, baProgressModal,md5,$window) {
+	function WorkersdetailCtrl($scope, $filter, $localStorage, editableOptions, editableThemes, WorkerService, workermodels, workertypelist, allgroups, allmenus, allpersm,$http, $timeout, $uibModal, baProgressModal,md5,$window,$state) {
 		
 		$scope.detail = workermodels.data;
 		
@@ -17,13 +17,29 @@
 		$scope.allper=allpersm.data;
 		
 	    $scope.selected = [];
-	    $scope.userpermiss=workermodels.data.permission;//用户权限
+	     $scope.userpermiss=[];
+	    if(workermodels.data.permission){
+	    	console.log(workermodels.data.permission);
+
+	    	 angular.forEach(JSON.parse(workermodels.data.permission),function(i){
+				$scope.userpermiss.push(i);
+	    	 });
+	    	//if(Array.isArray(workermodels.data.permission)){
+// workermodels.data.permission.forEach(function(value,index,array){
+//  $scope.userpermiss.push(value);
+// });
+console.log($scope.userpermiss);
+	    		}
+	//}
+	    
 	    var updateSelected = function(action, id) {
-	      if(action == 'add' & $scope.selected.indexOf(id) == -1) $scope.selected.push(id);
+	      if(action == 'add' && $scope.selected.indexOf(id) == -1) $scope.selected.push(id);
 	      if(action == 'remove' && $scope.selected.indexOf(id) != -1) $scope.selected.splice($scope.selected.indexOf(id), 1);
+
 	    };
 
 	    var updatepiSelected = function(action, id) {
+	    	console.log($scope.userpermiss);
 	      if(action == 'add' & $scope.userpermiss.indexOf(id) == -1) $scope.userpermiss.push(id);
 	      if(action == 'remove' && $scope.userpermiss.indexOf(id) != -1) $scope.userpermiss.splice($scope.userpermiss.indexOf(id), 1);
 	    };
@@ -31,10 +47,12 @@
 	 
 	    
 		if(!$scope.detail.id){//添加
+			$scope.addnew=true;
 			if(!$scope.detail.type){
 				$scope.detail.type = workertypelist.data[1];//赋予默认值,普通管理员
 			}
 		} else {
+			$scope.addnew=false;
 			//加载修改项
 			if ($scope.detail.group != '') {
 				//console.log($scope.detail.group);
@@ -107,8 +125,10 @@
 			
 			$scope.selected.sort();
 			$scope.detail.new_menus = $scope.selected;
-			
+			$scope.detail.new_permission = $scope.userpermiss;
+			if($scope.detail.password){
 			$scope.detail.password = md5.createHash($scope.detail.password);
+			}
 			layer.load(1);	
 			$http({
 					method: 'POST',
@@ -128,8 +148,8 @@
 							//$scope.detail.id=data.data.id;
 							//go to groups
 							layer.close(index);
-							$window.location.href = 'index.html#/workers/list';
-				          
+							//$window.location.href = 'index.html#/workers/list';
+				          $state.go('workers.list');
 				        });
 					} else {
 						// if successful, bind success message to message

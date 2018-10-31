@@ -44,7 +44,7 @@
         'Content-Type': 'application/x-www-form-urlencoded',
         'Authorization':authtoken,
       },
-    }).success(function(response) {
+  }).success(function(response) {
     if(!response.status){          
         $window.location.href = "/auth.html";
     }
@@ -52,7 +52,11 @@
     });
     $http.defaults.headers.common.Authorization = $localStorage.auth;
     $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
-   
+   	
+   	$rootScope.navigated = false;
+$rootScope.$on('$stateChangeSuccess', function (ev, to, toParams, from, fromParams) {
+    if (from.name) { $rootScope.navigated = true; }
+}); 
   });
 
   /** @ngInject */
@@ -101,7 +105,7 @@
         fixedHref: './reg.html',
       }]
     });
-  };
+  }
   
 
 

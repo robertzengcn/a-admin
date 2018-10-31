@@ -142,7 +142,7 @@
 
       else ctrl.selected.splice(found, 1);
 
-    }
+    };
     
     /**
      * reflash table
@@ -151,7 +151,7 @@
      */
     this.refreshGrid = function() {
       $scope.$broadcast('refreshWorkers');
-    }
+    };
 
     /**
      * 重置密码
@@ -175,7 +175,7 @@
           });
           layer.close(index);
         });
-    }
+    };
   }
 
 })();

@@ -70,7 +70,10 @@
               },
             allmenus:function(WorkerService){
                 return WorkerService.getallmenus();
-            }
+            },
+            allpersm:function(WorkerService){
+              	return WorkerService.getallpermisionlist();
+              }
           } 
         }).state('workers.grouplist', {
             url: '/grouplist',
@@ -97,6 +100,9 @@
             url: '/creategroup/', 
             templateUrl: 'app/pages/workers/widgets/groupDetail.html',
             title: 'Create Group',
+            sidebarMeta: {
+              order: 130,
+            },
             controller: 'WorkersgroupdetailCtrl',
             resolve: {
                 groupmodels:function($stateParams,WorkerService){

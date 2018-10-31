@@ -39,9 +39,10 @@
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-2 control-label" for="password">WORKER PASSWORD</label>  
+  <label class="col-md-2 control-label" for="password">WORKER PASSWORD 
+  <span class="requirspan" ng-if="addnew">*</span></label> 
   <div class="col-md-8">
-  <input id="password" name="password" placeholder="WORKER PASSWORD" class="form-control input-md"  type="password" ng-model="detail.password">
+  <input id="password" name="password" placeholder="WORKER PASSWORD" class="form-control input-md"  type="password" ng-model="detail.password"  ng-required='addnew'>
     
   </div>
 </div>
@@ -74,7 +75,8 @@
   <label class="col-md-2 control-label">MENUS<span class="requirspan">*</span></label>  
   <div class="col-md-8">
    <label class="checkbox checkbox-inline" ng-repeat="k in allmenus">
-    <input type="checkbox" ng-model="k.id" ng-true-value="{{k.id}}" ng-false-value="0" ng-checked="isSelected(k.id)" ng-click="updateSelection($event,k.id)">{{k.name}}
+
+    <input type="checkbox" ng-model="k.id" ng-true-value="{{k.id}}" ng-false-value="{{k.id}}" ng-checked="isSelected(k.id)" ng-click="updateSelection($event,k.id)">{{k.name}}
     </label>
   </div>
 </div>
@@ -83,7 +85,7 @@
   <label class="col-md-2 control-label">Permission<span class="requirspan">*</span></label>  
   <div class="col-md-8">
    <label class="checkbox checkbox-inline" ng-repeat="k in allper">
-    <input type="checkbox" ng-model="k.workers_permission_id" ng-true-value="{{k.workers_permission_id}}" ng-false-value="0" ng-checked="pisSelected(k.workers_permission_id)" ng-click="updateSelection($event,k.workers_permission_id)">{{k.workers_permission_name}}
+    <input type="checkbox" ng-model="k.workers_permission_id" ng-true-value="{{k.workers_permission_id}}" ng-false-value="{{k.workers_permission_id}}" ng-checked="pisSelected(k.workers_permission_id)" ng-click="updatepiSelection($event,k.workers_permission_id)">{{k.workers_permission_name}}
     </label>
   </div>
 </div>

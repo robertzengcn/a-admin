@@ -5,7 +5,9 @@
 <div class="form-group">
   <label class="col-md-2 control-label" for="singlebutton"></label>
   <div class="col-md-8">
-    <button id="singlebutton" name="singlebutton" class="btn btn-primary" type="submit">Submit</button>
+    <button id="singlebutton" name="singlebutton" class="btn btn-primary ml5" type="submit">Submit</button>
+
+    <a name="singlebutton" ng-if="detail.next" class="btn btn-primary fr ml5" class="btn btn-danger" ui-sref="products.detail({id:detail.next})">Next</a>
   </div>
   </div>  
 
@@ -381,4 +383,5 @@
 
 <style type="text/css">
 .marn60{margin-bottom: 30px;}
+
 </style>
