@@ -125,10 +125,12 @@ console.log($scope.userpermiss);
 			
 			$scope.selected.sort();
 			$scope.detail.new_menus = $scope.selected;
+
 			$scope.detail.new_permission = $scope.userpermiss;
 			if($scope.detail.password){
 			$scope.detail.password = md5.createHash($scope.detail.password);
 			}
+
 			layer.load(1);	
 			$http({
 					method: 'POST',
