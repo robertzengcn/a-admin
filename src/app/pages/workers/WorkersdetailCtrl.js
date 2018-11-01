@@ -18,19 +18,17 @@
 		
 	    $scope.selected = [];
 	     $scope.userpermiss=[];
-	    if(workermodels.data.permission){
-	    	console.log(workermodels.data.permission);
+	    if(workermodels.data.permission_detail){
+	    	
 
-	    	 angular.forEach(JSON.parse(workermodels.data.permission),function(i){
-				$scope.userpermiss.push(i);
+	    	 angular.forEach(workermodels.data.permission_detail,function(i){
+	    	 	
+				$scope.userpermiss.push(i.workers_permission_id);
 	    	 });
-	    	//if(Array.isArray(workermodels.data.permission)){
-// workermodels.data.permission.forEach(function(value,index,array){
-//  $scope.userpermiss.push(value);
-// });
-console.log($scope.userpermiss);
+
+
 	    		}
-	//}
+	
 	    
 	    var updateSelected = function(action, id) {
 	      if(action == 'add' && $scope.selected.indexOf(id) == -1) $scope.selected.push(id);
@@ -39,9 +37,11 @@ console.log($scope.userpermiss);
 	    };
 
 	    var updatepiSelected = function(action, id) {
-	    	console.log($scope.userpermiss);
+	    	
 	      if(action == 'add' & $scope.userpermiss.indexOf(id) == -1) $scope.userpermiss.push(id);
 	      if(action == 'remove' && $scope.userpermiss.indexOf(id) != -1) $scope.userpermiss.splice($scope.userpermiss.indexOf(id), 1);
+	   
+	      	console.log($scope.userpermiss);
 	    };
 
 	 
