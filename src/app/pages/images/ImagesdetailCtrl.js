@@ -8,7 +8,7 @@
 	angular.module('BlurAdmin.pages.products')
 		.controller('ImagesdetailCtrl', ImagesdetailCtrl);
 	/** @ngInject */
-	function ImagesdetailCtrl($scope, $filter, $localStorage, ImagesService, imagemodels, FileUploader, $http, Upload, $timeout) {
+	function ImagesdetailCtrl($scope, $filter, $localStorage, ImagesService, imagemodels, FileUploader, $http, Upload, $timeout,$state) {
 		$scope.detail = imagemodels.data;
 		var auth = $localStorage.auth;
 		var uploader = $scope.uploader = new FileUploader({ //图片上传插件
@@ -79,6 +79,7 @@
 						$scope.detail.id = data.data;
 						// if not successful, bind errors to error variables
 						layer.alert('Update success');
+						$state.go('images.list');
 					} else {
 						// if successful, bind success message to message
 						layer.alert(data.msg);
