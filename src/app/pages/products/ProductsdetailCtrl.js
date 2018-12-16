@@ -452,8 +452,13 @@
 			}).success(function(response) {
 				layer.closeAll('loading');
 				if (response.status) { //success
-
+					if($scope.detail.attr.optlist==undefined){
+						$scope.detail.attr.optlist=[];
+					}
 					$scope.detail.attr.optlist[response.data.products_options_id] = newattr;
+					if($scope.detail.attr.attrlist==undefined){
+						$scope.detail.attr.attrlist=[];
+					}
 					$scope.detail.attr.attrlist[response.data.products_options_id] = [];
 					//console.log($scope.detail.attr.attrlist);
 					var sitems = {};
