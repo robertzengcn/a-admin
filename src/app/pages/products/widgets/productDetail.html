@@ -335,7 +335,7 @@
 
                           <tr ng-repeat="sitem in item track by $index">
 
-                            <td  ng-if="$first" rowspan={{item.length}}>{{detail.attr.optlist[ikey]}}</td>
+                            <td  ng-if="$first" rowspan={{item.length}} test={{ikey}}>{{detail.attr.optlist[ikey]}}</td>
 
                             <td>{{sitem.products_options_values_name}}</td>
                             <td>{{sitem.products_options_types_name}}</td>

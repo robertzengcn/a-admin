@@ -388,7 +388,7 @@
 		 */
 		$scope.opensetatti = function(page, size, item, pid) {
 			//$scope.modalatt = item;
-			console.log(item);
+			console.log($scope.detail.attr.attrlist);
 			var uibModalInstance = $uibModal.open({
 				animation: true,
 				templateUrl: page,
@@ -412,9 +412,18 @@
 			});
 			uibModalInstance.result.then(function(selectedItem) {
 				console.log(selectedItem);
-				console.log($scope.detail.attr.attrlist[selectedItem.options_id]);
+				//console.log($scope.detail.attr.attrlist[selectedItem.options_id]);
+				console.log(selectedItem.options_id);
+				//var cid=selectedItem.options_id;
+				//if(!$scope.detail.attr.attrlist.cid){
+
+				$scope.detail.attr.attrlist[selectedItem.options_id]=[];
 				$scope.detail.attr.attrlist[selectedItem.options_id].push(selectedItem);
-				console.log($scope.detail.attr.attrlist[selectedItem.options_id]);
+			//}
+				console.log($scope.detail.attr.optlist);
+
+				//$scope.detail.attr.attrlist.cid.push(selectedItem);
+				console.log($scope.detail.attr.attrlist);
 			}, function() {
 				//$log.info('Modal dismissed at: ' + new Date());
 			});
@@ -617,7 +626,7 @@
 					reitem.products_options_values_name = $scope.atta_options_values;
 					reitem.attributes_status = $scope.atta_status;
 					$uibModalInstance.close(reitem);
-
+					//$scope.detail.attr.attrlist.push();
 				} else {
 					layer.alert(response.msg);
 				}
