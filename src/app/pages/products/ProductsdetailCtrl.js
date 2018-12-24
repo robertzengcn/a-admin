@@ -387,6 +387,7 @@
 		 * @return    {[type]}
 		 */
 		$scope.opensetatti = function(page, size, item, pid) {
+			console.log($scope.detail.attr.attrlist);
 			//$scope.modalatt = item;
 			console.log($scope.detail.attr.attrlist);
 			var uibModalInstance = $uibModal.open({
@@ -416,8 +417,10 @@
 				console.log(selectedItem.options_id);
 				//var cid=selectedItem.options_id;
 				//if(!$scope.detail.attr.attrlist.cid){
-
-				$scope.detail.attr.attrlist[selectedItem.options_id]=[];
+			if($scope.detail.attr.attrlist[selectedItem.options_id]==undefined||!$scope.detail.attr.attrlist[selectedItem.options_id]){
+				console.log('make one');
+				$scope.detail.attr.attrlist[selectedItem.options_id]=[];	
+			}
 				$scope.detail.attr.attrlist[selectedItem.options_id].push(selectedItem);
 			//}
 				console.log($scope.detail.attr.optlist);
