@@ -8,7 +8,7 @@
 	angular.module('BlurAdmin.pages.products')
 		.controller('ProductsdetailCtrl', ProductsdetailCtrl);
 	/** @ngInject */
-	function ProductsdetailCtrl($scope, $filter, $localStorage, editableOptions, editableThemes, ProductService, productmodels, cateloguelist, FileUploader, $http, Upload, $timeout, $uibModal, baProgressModal) {
+	function ProductsdetailCtrl($scope, $filter, $localStorage, editableOptions, editableThemes, ProductService, productmodels, cateloguelist, FileUploader, $http, Upload, $timeout, $uibModal, baProgressModal, $state) {
 		var auth = $localStorage.auth;
 		var uploader = $scope.uploader = new FileUploader({
 			url: $localStorage.fileapi,
@@ -22,18 +22,18 @@
 
 		$scope.detail = productmodels.data;
 
-		
-		$scope.cateloguelist = cateloguelist.data;
-		if(!$scope.detail.products_id){//新建产品
-			$scope.detail.products_status=true;
 
-		if(!$scope.detail.master_categories_id){
-			$scope.detail.master_categories_id=$scope.cateloguelist[0].categories_id;//赋予默认值
-		}
-		$scope.detail.image_list=[];
-		$scope.detail.attr={};
-		$scope.detail.attr.optlist=[];
-		$scope.detail.attr.attrlist=[];
+		$scope.cateloguelist = cateloguelist.data;
+		if (!$scope.detail.products_id) { //新建产品
+			$scope.detail.products_status = true;
+
+			if (!$scope.detail.master_categories_id) {
+				$scope.detail.master_categories_id = $scope.cateloguelist[0].categories_id; //赋予默认值
+			}
+			$scope.detail.image_list = [];
+			$scope.detail.attr = {};
+			$scope.detail.attr.optlist = [];
+			$scope.detail.attr.attrlist = [];
 		}
 		//配置ueditor
 		$scope.config = {
@@ -389,7 +389,7 @@
 		$scope.opensetatti = function(page, size, item, pid) {
 			console.log($scope.detail.attr.attrlist);
 			//$scope.modalatt = item;
-			console.log($scope.detail.attr.attrlist);
+			//console.log($scope.detail.attr.attrlist);
 			var uibModalInstance = $uibModal.open({
 				animation: true,
 				templateUrl: page,
@@ -412,21 +412,24 @@
 
 			});
 			uibModalInstance.result.then(function(selectedItem) {
-				console.log(selectedItem);
+				//console.log($scope.detail.attr.attrlist);
+				//console.log(selectedItem);
 				//console.log($scope.detail.attr.attrlist[selectedItem.options_id]);
-				console.log(selectedItem.options_id);
-				//var cid=selectedItem.options_id;
-				//if(!$scope.detail.attr.attrlist.cid){
-			if($scope.detail.attr.attrlist[selectedItem.options_id]==undefined||!$scope.detail.attr.attrlist[selectedItem.options_id]){
-				console.log('make one');
-				$scope.detail.attr.attrlist[selectedItem.options_id]=[];	
-			}
+				//console.log(selectedItem.options_id);
+
+				//console.log('make one');
+
+				//console.log($scope.detail.attr.attrlist[selectedItem.options_id]);
+				if ($scope.detail.attr.attrlist[selectedItem.options_id] == undefined) {
+					$scope.detail.attr.attrlist[selectedItem.options_id] = [];
+				}
+
 				$scope.detail.attr.attrlist[selectedItem.options_id].push(selectedItem);
-			//}
-				console.log($scope.detail.attr.optlist);
+
+				//console.log($scope.detail.attr.optlist);
 
 				//$scope.detail.attr.attrlist.cid.push(selectedItem);
-				console.log($scope.detail.attr.attrlist);
+				//console.log($scope.detail.attr.attrlist);
 			}, function() {
 				//$log.info('Modal dismissed at: ' + new Date());
 			});
@@ -442,6 +445,19 @@
 				layer.alert('attributes name is empty');
 				return;
 			}
+			var keepGoing = true;
+			angular.forEach($scope.detail.attr.optlist, function(value, key) {
+				if (keepGoing) {
+					if (value == newattr) {
+						layer.alert('The Options already exist');
+						keepGoing = false;
+					}
+				}
+			});
+			if (keepGoing == false) {
+				return;
+			}
+			console.log($scope.detail.attr.optlist);
 			console.log(newattrtype);
 			layer.load(1);
 			$http({
@@ -464,12 +480,12 @@
 			}).success(function(response) {
 				layer.closeAll('loading');
 				if (response.status) { //success
-					if($scope.detail.attr.optlist==undefined){
-						$scope.detail.attr.optlist=[];
+					if ($scope.detail.attr.optlist == undefined) {
+						$scope.detail.attr.optlist = [];
 					}
 					$scope.detail.attr.optlist[response.data.products_options_id] = newattr;
-					if($scope.detail.attr.attrlist==undefined){
-						$scope.detail.attr.attrlist=[];
+					if ($scope.detail.attr.attrlist == undefined) {
+						$scope.detail.attr.attrlist = [];
 					}
 					$scope.detail.attr.attrlist[response.data.products_options_id] = [];
 					//console.log($scope.detail.attr.attrlist);
@@ -498,7 +514,7 @@
 		 */
 		$scope.changestatus = function(item, status) {
 
-			
+
 			layer.load(1);
 			$http({
 				method: "POST",
@@ -537,12 +553,12 @@
 		 * @return    {[type]}    [description]
 		 */
 		$scope.processForm = function() {
-			layer.load(1);		
+			layer.load(1);
 			$http({
 					method: 'POST',
 					url: $scope.app.host + "/Products/save/",
 					data: $.param($scope.detail), // pass in data as strings
-					
+
 					headers: {
 						'Content-Type': 'application/x-www-form-urlencoded'
 					} // set the headers so angular passing info as form data (not request payload)
@@ -552,13 +568,31 @@
 					console.log(data);
 
 					if (data.status) {
-						$scope.detail.products_id=data.data.products_id;
-						$scope.detail.products_description=data.data.products_description;
+						$scope.detail.products_id = data.data.products_id;
+						$scope.detail.products_description = data.data.products_description;
 						// if not successful, bind errors to error variables
-						layer.alert('Update success');
+
+						layer.alert('update success', {
+							btn: ['ok', 'go list', 'go list'] //可以无限个按钮
+								,
+							btn3: function(index, layero) {
+								console.log(3);
+								$state.go('products.list');
+							},
+
+
+						}, function(index, layero) {
+							console.log(1);
+							layer.close(index);
+						}, function(index) {
+							console.log('2');
+							$state.go('products.list');
+						});
 					} else {
 						// if successful, bind success message to message
-						layer.alert(data.msg);
+						layer.alert('Update fail', {
+							icon: 2
+						});
 					}
 				});
 		};
@@ -579,7 +613,7 @@
 
 		$scope.saveatta = function() {
 			//console.log($scope.atta_options_values);
-			var index = layer.load();
+
 			if (!$scope.atta_options_values) {
 				layer.alert('options values is empty');
 				return;
@@ -591,6 +625,7 @@
 			if (!$scope.atta_status) {
 				$scope.atta_status = 0;
 			}
+			var index = layer.load();
 			$http({
 				method: "POST",
 				url: $scope.app.host + "/Products/addoptionvalues/",
