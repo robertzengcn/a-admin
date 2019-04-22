@@ -105,13 +105,13 @@ return gulp.src(path.join(conf.paths.src, '/alone/*'))
  .pipe(gulp.dest(path.join(conf.paths.tmp, '/serve/alone')));
 });
 
-gulp.task('injectjslib', [], function () {
+gulp.task('injectjslib', ['move_env'], function () {
  
 return gulp.src([path.join(conf.paths.src, '/jslib/*'), path.join(conf.paths.src, '/jslib/**/*')])
  .pipe(gulp.dest(path.join(conf.paths.tmp, '/serve/jslib')));
 });
 
-gulp.task('move_alone', function () {
+gulp.task('move_alone',[] ,function (){
   return gulp
     .src([
       path.join(conf.paths.src, '/alone/*js')
