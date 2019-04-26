@@ -9,6 +9,7 @@
     
    Catelogue: <select ng-options="value.categories_id as value.categories_name group by value.parent for (key,value) in cateloguelist" ng-model="master_categories_id"><option value="">All</option></select>
    <button ng-click="mc.refreshGrid()">Reflash</button>
+    
    <span class="fl">result number:{{resultnum}}</span>
     </div>
 </div>
