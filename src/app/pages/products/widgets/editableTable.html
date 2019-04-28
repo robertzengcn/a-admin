@@ -5,11 +5,11 @@
         Handle Information 
     </div>
     <div class="panel-body">
-        <button ng-click="mc.deletebatchitem()">Delete choose item</button>
+        <button ng-click="mc.deletebatchitem()" class="btn btn-danger">Delete choose item</button>
     
    Catelogue: <select ng-options="value.categories_id as value.categories_name group by value.parent for (key,value) in cateloguelist" ng-model="master_categories_id"><option value="">All</option></select>
-   <button ng-click="mc.refreshGrid()">Reflash</button>
-    
+   <button ng-click="mc.refreshGrid()" class="btn btn-info">Reflash</button>
+    <button ng-click="mc.removecache()" class="btn btn-warning">Remove product cache</button>
    <span class="fl">result number:{{resultnum}}</span>
     </div>
 </div>

@@ -213,8 +213,15 @@
         });
       
     };
+    this.removecache=function(){
+      ProductService.getcateloguelist().then(function(result) {
+        
+      });
+    };
     
     this.getcatelist();
+
+
 
 
 
