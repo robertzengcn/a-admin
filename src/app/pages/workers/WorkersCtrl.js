@@ -167,8 +167,10 @@
           WorkerService.resetpwd(row.id).then(function(result) {
             layer.closeAll('loading');
             if (result.status) {
-              layer.msg('reset password success');
-              ctrl.refreshGrid();
+              layer.alert('new password is '+result.data.pass,function(index){
+                  ctrl.refreshGrid();
+              });
+            
             } else {
               layer.alert(result.msg);
             }

@@ -26,6 +26,7 @@
     var authtoken = $localStorage.auth;
 
     if (!authtoken) {
+      console.log('token not exist');
       $window.location.href = "/auth.html";
     }
 

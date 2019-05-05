@@ -118,7 +118,7 @@
 		 * 提交表单
 		 */
 		$scope.processForm = function() {
-			if ($scope.detail.password != $scope.confirmpassword) {
+			if ($scope.addnew&&($scope.detail.password != $scope.confirmpassword)) {
 				layer.alert('Password is different from confirmpassword!');
 				return false;
 			}
@@ -127,7 +127,7 @@
 			$scope.detail.new_menus = $scope.selected;
 
 			$scope.detail.new_permission = $scope.userpermiss;
-			if($scope.detail.password){
+			if($scope.addnew&&$scope.detail.password){
 			$scope.detail.password = md5.createHash($scope.detail.password);
 			}
 

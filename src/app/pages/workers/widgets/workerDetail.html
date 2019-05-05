@@ -38,7 +38,7 @@
 </div>
 
 <!-- Text input-->
-<div class="form-group">
+<div class="form-group" ng-if="addnew">
   <label class="col-md-2 control-label" for="password">WORKER PASSWORD 
   <span class="requirspan" ng-if="addnew">*</span></label> 
   <div class="col-md-8">
@@ -48,10 +48,10 @@
 </div>
 
 <!-- Text input-->
-<div class="form-group">
+<div class="form-group" ng-if="addnew">
   <label class="col-md-2 control-label" for="confirm_password">CONFIRM PASSWORD</label>  
   <div class="col-md-8">
-  <input id=""confirm_password"" name=""confirm_password"" placeholder="CONFIRM PASSWORD" class="form-control input-md"  type="password" ng-model="confirmpassword">
+  <input id="confirm_password" name="confirm_password" placeholder="CONFIRM PASSWORD" class="form-control input-md"  type="password" ng-model="confirmpassword">
     
   </div>
 </div>
