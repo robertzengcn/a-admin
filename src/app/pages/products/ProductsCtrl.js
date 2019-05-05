@@ -214,8 +214,15 @@
       
     };
     this.removecache=function(){
-      ProductService.getcateloguelist().then(function(result) {
-        
+      layer.load(1);
+      ProductService.deletecache().then(function(result) {
+        layer.closeAll('loading');
+        if(result.status){
+          layer.alert('delete success');
+
+        }else{
+          layer.alert(result.msg);
+        }
       });
     };
     

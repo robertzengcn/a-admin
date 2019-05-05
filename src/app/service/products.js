@@ -203,7 +203,8 @@
         //   ids: ids
         // });
         console.log(ids);
-        $http.delete(apphost + "/products/deletes/",{params: {'ids':ids}})
+        var removearr=["product_info"];
+        $http.delete(apphost + "/Files/removeCache/",{params: {'data':removearr.join(';')}})
           .success(function(data) {
             // var result = [];
             // for(var i = 0; i < data.length; i++){
@@ -227,6 +228,7 @@
         getproductmodel: getproductmodel,
         deleteproduct:deleteproduct,
         batchdelete:batchdelete,
+        deletecache:deletecache,
       };
 
     }]);
