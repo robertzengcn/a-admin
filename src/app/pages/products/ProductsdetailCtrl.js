@@ -595,6 +595,9 @@
 							icon: 2
 						});
 					}
+				}).error(function(data){
+					layer.closeAll('loading');
+					layer.alert('some error happened');
 				});
 		};
 
