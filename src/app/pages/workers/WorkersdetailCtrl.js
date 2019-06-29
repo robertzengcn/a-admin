@@ -49,8 +49,10 @@
 		if(!$scope.detail.id){//添加
 			$scope.addnew=true;
 			if(!$scope.detail.type){
-				$scope.detail.type = workertypelist.data[1];//赋予默认值,普通管理员
+				$scope.detail.type = 2;//赋予默认值,普通管理员
 			}
+			console.log(workertypelist.data);
+			console.log($scope.detail.type);
 		} else {
 			$scope.addnew=false;
 			//加载修改项
@@ -118,7 +120,9 @@
 		 * 提交表单
 		 */
 		$scope.processForm = function() {
-			if ($scope.addnew&&($scope.detail.password != $scope.confirmpassword)) {
+			console.log($scope.detail.password);
+			console.log($scope.detail.confirmpassword);
+			if ($scope.addnew&&($scope.detail.password != $scope.detail.confirmpassword)) {
 				layer.alert('Password is different from confirmpassword!');
 				return false;
 			}
