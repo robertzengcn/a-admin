@@ -23,6 +23,7 @@
       <th st-sort="products_model">Model</th>
       <th st-sort="products_price">Price</th>
       <th st-sort="products_quantity">Quantity</th>
+      <th st-sort="products_quantity">Status</th>
       <th st-sort="products_quantity">Handle</th>
     </tr>
     <tr><th colspan="7"><input st-search="" class="form-control" placeholder="global search ..." type="text"/></th></tr>
@@ -36,6 +37,7 @@
     <td>{{row.products_model}}</td>
     <td>{{row.products_price}}</td>
     <td>{{row.products_quantity}}</td>
+    <td>{{row.products_status==1 && 'ON'||'OFF'}}</td>
     <td><div class="buttons">
         <a class="btn btn-primary editable-table-button btn-xs" ui-sref="products.detail({id:row.products_id})">Edit</a>
         <button class="btn btn-danger editable-table-button btn-xs" ng-click="mc.removeitem(row)">Delete</button>

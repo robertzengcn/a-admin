@@ -279,7 +279,9 @@
 				}).success(function(response) {
 					layer.close(index);
 					if (response.status) { //success
-
+						//console.log($scope.detail.attr.optlist[$scope.detail.attr.attrlist[sname][0].options_id]);
+						//console.log($scope.detail.attr.attrlist[sname]);
+						delete $scope.detail.attr.optlist[$scope.detail.attr.attrlist[sname][0].options_id]
 						delete $scope.detail.attr.attrlist[sname];
 
 					} else {
@@ -446,6 +448,7 @@
 				return;
 			}
 			var keepGoing = true;
+			console.log($scope.detail.attr.optlist);
 			angular.forEach($scope.detail.attr.optlist, function(value, key) {
 				if (keepGoing) {
 					if (value == newattr) {
@@ -480,6 +483,8 @@
 			}).success(function(response) {
 				layer.closeAll('loading');
 				if (response.status) { //success
+					console.log($scope.detail.attr.optlist);
+					$scope.showattrlist=true;
 					if ($scope.detail.attr.optlist == undefined) {
 						$scope.detail.attr.optlist = [];
 					}
