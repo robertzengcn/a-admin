@@ -19,6 +19,7 @@
       <th row-select-all="mc.displayed"  selected="mc.selected" ng-click="mc.selectAll(mc.displayed)"></th>
       <th class="table-id">#</th>
       <th st-sort="products_name">Name</th>
+      <th st-sort="products_name">Product id</th>
       <th>Image</th>
       <th st-sort="products_model">Model</th>
       <th st-sort="products_price">Price</th>
@@ -33,6 +34,7 @@
   <td cs-select="row" ng-click="mc.select(row.products_id)"></td>
     <td>{{$index+1}}</td>
     <td>{{row.products_name}}</td>
+    <td>{{row.products_id}}</td>
     <td><img ng-src="{{row.products_image_url}}" class="img-thumbnail hundeimg" /></td>
     <td>{{row.products_model}}</td>
     <td>{{row.products_price}}</td>

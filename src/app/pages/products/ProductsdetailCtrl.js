@@ -116,8 +116,37 @@
 			$scope.showimagelist = true;
 
 		}
-		$scope.deleteimage = function(idx) {
-			$scope.detail.image_list.splice(idx, 1);
+		$scope.deleteimage = function(idx,pid) {
+			var index=layer.load(1);
+			$http({
+					method: "delete",
+					url: $scope.app.host + "/Products/delmultiimg/",
+					data: {
+						pid: pid,
+						
+					},
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded'
+					},
+					transformRequest: function(obj) {
+						var str = [];
+						for (var s in obj) {
+							str.push(encodeURIComponent(s) + "=" + encodeURIComponent(obj[s]));
+						}
+						return str.join("&");
+					}
+				}).success(function(response) {
+					layer.close(index);
+					if (response.status) { //success
+
+					$scope.detail.image_list.splice(idx, 1);
+
+					} else {
+						layer.alert('delete fail');
+					}
+				});
+			
+
 		};
 
 		var uploaders = $scope.uploaders = new FileUploader({
@@ -144,6 +173,9 @@
 			console.info('onCompleteItem', fileItem, response, status, headers);
 			console.log(status);
 			if (response.status) {
+				if(!$scope.detail.image_list){
+					$scope.detail.image_list=[];
+				}
 				var sizes = $scope.detail.image_list.length + 1;
 				var nimages = {};
 				nimages.fullurl = response.data.url;
@@ -153,6 +185,7 @@
 				console.log(nimages);
 				$scope.detail.image_list.push(nimages);
 				console.log($scope.detail.image_list);
+				$scope.showimagelist=true;
 			} else {
 
 				layer.alert(response.msg);
@@ -526,6 +559,48 @@
 				url: $scope.app.host + "/Products/chattrstatus/",
 				data: {
 					attr: item,
+					status: status
+				},
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded'
+				},
+				transformRequest: function(obj) {
+					var str = [];
+					for (var s in obj) {
+						str.push(encodeURIComponent(s) + "=" + encodeURIComponent(obj[s]));
+					}
+					return str.join("&");
+				}
+			}).success(function(response) {
+				layer.closeAll('loading');
+				if (response.status) { //success
+
+
+				} else {
+
+				}
+			});
+		};
+		/**
+		 * 修改产品选项是否显示image的状态
+		 * @Author    Robert      Zeng
+		 * @DateTime  2019-08-14
+		 * @copyright [copyright]
+		 * @license   [license]
+		 * @version   [version]
+		 * @param     {[type]}    item   [description]
+		 * @param     {[type]}    status [description]
+		 * @return    {[type]}           [description]
+		 */
+		$scope.changeproimgstatus = function(item, status) {
+
+			console.log(status);
+			layer.load(1);
+			$http({
+				method: "POST",
+				url: $scope.app.host + "/Products/chattrimgstatus/",
+				data: {
+					option: item,
 					status: status
 				},
 				headers: {

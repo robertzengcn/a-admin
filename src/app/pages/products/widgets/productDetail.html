@@ -188,7 +188,7 @@
     <tbody id="imagelist_body">
 
       <tr ng-repeat="item in detail.image_list track by $index">
-        <td><img ng-src="{{item.fullurl}}" width="50px" height="50px" /><input type="hidden" ng-model="item.image"></td><td><input ng-model="item.num" name="image_list[]"></td><td><button ng-click="deleteimage($index)" type="button">delete</button></td>
+        <td><img ng-src="{{item.fullurl}}" width="50px" height="50px" /><input type="hidden" ng-model="item.image"></td><td><input ng-model="item.num" name="image_list[]"></td><td><button ng-click="deleteimage($index,item.image_id)" type="button">delete</button></td>
       </tr>
        
     </tbody>
@@ -330,6 +330,7 @@
                                 <th >Image</th>
                                 <th>Status</th>
                                 <th>Actions</th>
+                                 <th>Option control</th>
                             </tr>
                         </thead>
                         <tbody ng-repeat="(ikey,item) in detail.attr.attrlist track by $index" ng-init="parentIndex = $index">
@@ -352,6 +353,8 @@
                             </td>
                             <td  ng-if="$first" rowspan={{item.length}}><button class="btn btn-warning" data-toggle="modal" ng-click="opensetatti('app/pages/products/widgets/addattModal.html', 'sm',sitem,detail.products_id)">Add</button>
                               <button class="btn btn-danger" ng-click="delattri(detail.products_id,ikey)">Delete</button>
+
+                              <ba-switcher ng-if="sitem.products_options_types_name=='Radio'" switcher-style="primary" switcher-value="sitem.products_options_images_style" switcherexe="changeproimgstatus(sitem.options_id,!sitem.products_options_images_style)"></ba-switcher>
                             </td>
 
                           </tr>
