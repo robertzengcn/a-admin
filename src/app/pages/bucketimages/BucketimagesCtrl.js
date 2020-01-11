@@ -5,8 +5,8 @@
 (function() {
   'use strict';
 
-  angular.module('BlurAdmin.pages.images')
-    .controller('ImagesCtrl', ImagesCtrl);
+  angular.module('BlurAdmin.pages.bucketimages')
+    .controller('BucketimagesCtrl', ImagesCtrl);
 
   /** @ngInject */
   function ImagesCtrl($scope, $filter, editableOptions, editableThemes, ImagesService) {

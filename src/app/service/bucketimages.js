@@ -52,7 +52,7 @@
             'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
           }
         };
-        $http.post(apphost + "/images/getlist/", data)
+        $http.post(apphost + "/Bucketimages/getlist/", data)
           .success(function(data) {
             // var result = [];
             // for(var i = 0; i < data.length; i++){
@@ -70,32 +70,7 @@
         return promise;
 
       };
-      var getimage = function(id) {
-        
-        var deferred = $q.defer();
-        var promise = deferred.promise;
-        var data = $.param({
-          id: id
-        });
-
-        $http.post(apphost + "/images/getdetail/", data)
-          .success(function(data) {
-            // var result = [];
-            // for(var i = 0; i < data.length; i++){
-            //     result.push(data[i].user);
-            //     progress = (i+1)/data.length * 100;
-            //     deferred.notify(progress);
-            // }
-            deferred.resolve(
-              data
-            );
-          })
-          .error(function(error) {
-            deferred.reject(error);
-          });
-        return promise;
-
-      };
+      
       var getimagesmodel = function() {
         var model = {};
         model.data = {};
@@ -109,14 +84,8 @@
           id: id
         });
 
-        $http.post(apphost + "/images/deleteitem/", data)
-          .success(function(data) {
-            // var result = [];
-            // for(var i = 0; i < data.length; i++){
-            //     result.push(data[i].user);
-            //     progress = (i+1)/data.length * 100;
-            //     deferred.notify(progress);
-            // }
+        $http.post(apphost + "/Bucketimages/deleteitem/", data)
+          .success(function(data) {       
             deferred.resolve(
               data
             );
@@ -126,7 +95,6 @@
           });
         return promise;
       };
-
 
       return {
         getimagelist: getimagelist,
