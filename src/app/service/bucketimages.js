@@ -9,7 +9,7 @@
    * Represents current element as panel, adding all necessary classes.
    */
   angular.module('BlurAdmin.service')
-    .factory('ImagesService', ["$q", "$http", "$localStorage", function($q, $http, $localStorage) {
+    .factory('BucketImagesService', ["$q", "$http", "$localStorage", function($q, $http, $localStorage) {
       var apphost = $localStorage.host;
       var getimagelist = function(start, number, params) {
 
@@ -98,7 +98,6 @@
 
       return {
         getimagelist: getimagelist,
-        getimage: getimage,
        getimagesmodel: getimagesmodel,
        deleteimage:deleteimage,
       };

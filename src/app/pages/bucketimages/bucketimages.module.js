@@ -16,8 +16,8 @@
       url: '/bucketimages',
       template : '<ui-view  autoscroll="true" autoscroll-body-top></ui-view>',
       abstract: true,
-      controller: 'ImagesCtrl',
-      title: 'Images Manager',
+      controller: 'BucketimagesCtrl',
+      title: 'Bucket Manager',
       sidebarMeta: {
         icon: 'fa fa fa-image',
         order: 1,
