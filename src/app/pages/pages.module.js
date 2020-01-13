@@ -20,6 +20,7 @@
       'BlurAdmin.pages.profile',
       'BlurAdmin.pages.loginout',
       'BlurAdmin.pages.workers',
+      'BlurAdmin.pages.bucketimages',
     ])
     .config(routeConfig);
   bluradmin.run(function($rootScope, $http, $state, $stateParams, $localStorage, $window) {

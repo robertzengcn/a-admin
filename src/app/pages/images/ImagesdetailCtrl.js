@@ -5,7 +5,7 @@
 (function() {
 	'use strict';
 
-	angular.module('BlurAdmin.pages.products')
+	angular.module('BlurAdmin.pages.images')
 		.controller('ImagesdetailCtrl', ImagesdetailCtrl);
 	/** @ngInject */
 	function ImagesdetailCtrl($scope, $filter, $localStorage, ImagesService, imagemodels, FileUploader, $http, Upload, $timeout,$state) {

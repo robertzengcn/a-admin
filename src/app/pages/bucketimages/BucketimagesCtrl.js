@@ -5,11 +5,11 @@
 (function() {
   'use strict';
 
-  angular.module('BlurAdmin.pages.images')
-    .controller('ImagesCtrl', ImagesCtrl);
+  angular.module('BlurAdmin.pages.bucketimages')
+    .controller('BucketimagesCtrl', BucketimagesCtrl);
 
   /** @ngInject */
-  function ImagesCtrl($scope, $filter, editableOptions, editableThemes, ImagesService) {
+  function BucketimagesCtrl($scope, $filter, editableOptions, editableThemes, BucketImagesService) {
     // ProductService.getproductlist().then(function(result){
     // //$scope.productlist=result;
     // },function(error){
@@ -31,7 +31,7 @@
       var start = pagination.start || 0; // This is NOT the page number, but the index of item in the list that you want to use to display the table.
       var number = pagination.number || 10; // Number of entries showed per page.
 
-      ImagesService.getimagelist(start, number, tableState).then(function(result) {
+      BucketImagesService.getimagelist(start, number, tableState).then(function(result) {
 
         if (result.status) {
 
@@ -48,7 +48,7 @@
            return;
         }
         layer.load(1);
-      ImagesService.deleteimage(row.id).then(function(result) {
+        BucketImagesService.deleteimage(row.id).then(function(result) {
         layer.closeAll('loading');
         if (result.status) {
           layer.msg('delete success');
