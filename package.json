@@ -46,7 +46,7 @@
   "scripts": {
     "dev": "gulp serve",
     "build": "gulp serve:dist",
-    "postinstall": "bower install"
+    "postinstall": "./node_modules/bower install"
   },
   "dependencies": {
     "angular-material": "^1.1.8"
